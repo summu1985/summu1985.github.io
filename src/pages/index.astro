@@ -1,0 +1,323 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const expertise = [
+  {
+    title: 'Cloud-Native Architecture',
+    text: 'Enterprise architecture across OpenShift, application modernization, Kubernetes platforms, virtualization, multicluster operations and hybrid cloud.'
+  },
+  {
+    title: 'Integration & APIs',
+    text: 'API management, event-driven architecture, Kafka, enterprise integration patterns, Camel, gateway standardization and platform modernization.'
+  },
+  {
+    title: 'Software Security',
+    text: 'Growing focus on software supply chain security, vulnerability management, cloud-native application security, provenance and secure delivery.'
+  }
+];
+
+const work = [
+  {
+    kicker: 'Airport Modernization',
+    title: 'Enterprise modernization blueprint across multiple airports',
+    text: 'Architecture spanning platform engineering, integration, API management, event streaming, security, multicluster management and disaster recovery.',
+    tags: ['OpenShift', 'Integration', 'Kafka', 'Security', 'DR']
+  },
+  {
+    kicker: 'Healthcare',
+    title: 'Modernizing integration and API delivery',
+    text: 'Helped shape a phased roadmap from legacy point-to-point integration toward APIs, event-driven services and governed consumer access.',
+    tags: ['API Management', 'Camel', 'Kafka', 'Architecture']
+  },
+  {
+    kicker: 'Manufacturing',
+    title: 'Application and virtualization transformation',
+    text: 'Modernization approaches spanning containerized applications, virtual machines, Windows workloads, MES integration and infrastructure migration.',
+    tags: ['OpenShift Virtualization', '.NET', 'MES', 'Migration']
+  }
+];
+
+const projects = [
+  {
+    title: 'RouteMint',
+    text: 'A lightweight API management initiative built around Apache APISIX and Keycloak, focused on practical API lifecycle, consumer access, security and analytics.',
+    status: 'Building'
+  },
+  {
+    title: 'Security Demonstration Lab',
+    text: 'A vendor-neutral environment for exploring software supply chain security, provenance, vulnerability management and cloud-native security controls.',
+    status: 'In progress'
+  },
+  {
+    title: 'OpenShift Networking Lab',
+    text: 'Hands-on exploration of VM networking, OVN-Kubernetes, UDNs, BGP/EVPN concepts, storage and hybrid virtualization architectures.',
+    status: 'Learning'
+  }
+];
+
+
+const povs = [
+  {
+    number: '01',
+    title: 'Open Datacenter Modernization',
+    text: 'A practical decision framework for infrastructure modernization covering workload assessment, private vs public cloud, migration approaches, TCO, skills, operating model, open-source options and enterprise-supported implementations.',
+    tags: ['Datacenter', 'Virtualization', 'Hybrid Cloud', 'Migration']
+  },
+  {
+    number: '02',
+    title: 'Open Data Platform Modernization',
+    text: 'A blueprint for evolving data lakes and warehouses toward open, event-driven data platforms with pluggable ingestion, streaming, processing, storage, governance, analytics and AI services.',
+    tags: ['Data Lake', 'Data Warehouse', 'Kafka', 'Analytics']
+  },
+  {
+    number: '03',
+    title: 'Enterprise AI & GenAI Factory',
+    text: 'A repeatable factory model for moving from AI experiments to governed production services across data preparation, model choice, RAG, evaluation, deployment, security, observability and lifecycle management.',
+    tags: ['AI', 'GenAI', 'MLOps', 'Governance']
+  },
+  {
+    number: '04',
+    title: 'Connected Enterprise: Edge, OT & IT/OT Modernization',
+    text: 'A modernization pattern connecting machines, industrial systems, edge platforms and enterprise applications through secure integration, events, APIs, fleet management and distributed computing.',
+    tags: ['Edge', 'OT', 'IIoT', 'Integration']
+  },
+  {
+    number: '05',
+    title: 'Application Modernization Factory',
+    text: 'A structured approach to assess, prioritize and transform application estates using rehost, replatform, refactor, replace and retire patterns with platform engineering and DevSecOps practices.',
+    tags: ['Applications', 'Containers', 'DevSecOps', 'Platform Engineering']
+  },
+  {
+    number: '06',
+    title: 'Enterprise Integration Modernization',
+    text: 'A path from centralized ESB and point-to-point integration toward APIs, events and distributed integration using open standards and interchangeable gateway, messaging and integration technologies.',
+    tags: ['API', 'Events', 'Kafka', 'Integration']
+  },
+  {
+    number: '07',
+    title: 'Secure Software Factory',
+    text: 'A software supply chain blueprint spanning source, CI/CD, SBOM, signing, provenance, policy, registry, deployment and runtime controls with open-source and enterprise security tooling.',
+    tags: ['Supply Chain', 'SBOM', 'Provenance', 'Security']
+  },
+  {
+    number: '08',
+    title: 'Hybrid & Sovereign Cloud Platform',
+    text: 'A common operating model for applications across private datacenters, public cloud and edge with consistent governance, automation, security, lifecycle management and workload portability.',
+    tags: ['Hybrid Cloud', 'Sovereignty', 'Multicluster', 'Automation']
+  }
+];
+
+const speaking = [
+  'Enterprise modernization and OpenShift architecture',
+  'Developer experience and security',
+  'Manufacturing, MES and industrial modernization',
+  'Software supply chain and cloud-native security'
+];
+---
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="#top">SM</a>
+    <nav aria-label="Main navigation">
+      <a href="#work">Work</a>
+      <a href="#povs">POVs</a>
+      <a href="#security">Security</a>
+      <a href="#projects">Projects</a>
+      <a href="#speaking">Speaking</a>
+      <a href="#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="eyebrow">SOLUTIONS ARCHITECT · CLOUD NATIVE · SECURITY</div>
+      <h1>I design platforms that help enterprises <span>modernize with confidence.</span></h1>
+      <p class="hero-copy">
+        I work at the intersection of cloud-native architecture, application modernization,
+        integration, virtualization and software security—turning complex technology choices
+        into practical enterprise outcomes.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#work">Explore my work</a>
+        <a class="button secondary" href="#about">About me</a>
+      </div>
+      <div class="hero-proof">
+        <div><strong>18+</strong><span>Years in technology</span></div>
+        <div><strong>Enterprise</strong><span>Architecture & transformation</span></div>
+        <div><strong>Security</strong><span>Current strategic focus</span></div>
+      </div>
+    </section>
+
+    <section class="section shell intro-grid" id="about">
+      <div>
+        <div class="section-label">01 / PROFILE</div>
+        <h2>Architecture beyond the diagram.</h2>
+      </div>
+      <div class="large-copy">
+        <p>
+          I am a solutions architect focused on solving enterprise modernization problems—not
+          simply selecting products. My work connects infrastructure, applications, APIs,
+          integration, security and operations into architectures that can actually be adopted.
+        </p>
+        <p>
+          I am increasingly concentrating my research and hands-on work on software supply chain
+          security and cloud-native application security, with the goal of connecting security
+          decisions to developer and platform engineering workflows.
+        </p>
+      </div>
+    </section>
+
+    <section class="section shell" id="security">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">02 / EXPERTISE</div>
+          <h2>Where I spend my time.</h2>
+        </div>
+        <p>Three areas that increasingly converge in modern enterprise architecture.</p>
+      </div>
+
+      <div class="cards three">
+        {expertise.map((item, i) => (
+          <article class="card">
+            <span class="card-number">0{i + 1}</span>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell" id="work">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">03 / SELECTED WORK</div>
+          <h2>Problems I help solve.</h2>
+        </div>
+        <p>Representative architecture themes. Customer-sensitive details are intentionally omitted.</p>
+      </div>
+
+      <div class="work-list">
+        {work.map((item) => (
+          <article class="work-item">
+            <div class="work-kicker">{item.kicker}</div>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <div class="tags">
+                {item.tags.map((tag) => <span>{tag}</span>)}
+              </div>
+              <div class="coming-soon">CASE STUDY · COMING SOON</div>
+            </div>
+            <span class="arrow">↗</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+
+    <section class="section shell" id="povs">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">04 / ARCHITECTURE POVs</div>
+          <h2>Open Enterprise Modernization Blueprints.</h2>
+        </div>
+        <p>
+          Practical, opinionated guides for recurring enterprise transformation decisions.
+          Each starts with the problem and decision framework first, then maps open-source,
+          Red Hat and ecosystem technologies as pluggable implementation choices.
+        </p>
+      </div>
+
+      <div class="pov-intro">
+        <p>
+          The objective is not to retrofit a product into every problem. These blueprints are intended
+          to help customers and practitioners answer the questions that come before product selection:
+          what to modernize, what prerequisites matter, how to migrate, what it may cost, which skills
+          are needed, and whether to build, buy or consume the platform as a managed service.
+        </p>
+      </div>
+
+      <div class="pov-grid">
+        {povs.map((pov) => (
+          <article class="pov-card">
+            <div class="pov-number">{pov.number}</div>
+            <h3>{pov.title}</h3>
+            <p>{pov.text}</p>
+            <div class="tags">
+              {pov.tags.map((tag) => <span>{tag}</span>)}
+            </div>
+            <div class="pov-status">POV · COMING SOON</div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell" id="projects">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">05 / BUILDING & LEARNING</div>
+          <h2>Projects that show how I think.</h2>
+        </div>
+        <p>Hands-on work outside the boundaries of a conventional résumé.</p>
+      </div>
+
+      <div class="cards three">
+        {projects.map((project) => (
+          <article class="project-card">
+            <div class="status">{project.status}</div>
+            <h3>{project.title}</h3>
+            <p>{project.text}</p>
+            <a href="#" aria-label={`Learn more about ${project.title}`}>Case study coming soon →</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell thought">
+      <div>
+        <div class="section-label">06 / CURRENT RESEARCH</div>
+        <h2>Security needs better prioritization, not just more vulnerability data.</h2>
+      </div>
+      <div>
+        <p>
+          One theme I am exploring is how teams can move from “everything vulnerable is urgent”
+          toward evidence-driven prioritization using exploitability, reachability, provenance,
+          runtime context and business impact.
+        </p>
+        <a class="text-link" href="#">Read future notes & articles →</a>
+      </div>
+    </section>
+
+    <section class="section shell" id="speaking">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">07 / SPEAKING</div>
+          <h2>Topics I speak about.</h2>
+        </div>
+        <p>I enjoy translating complex architecture into a clear story for technical and business audiences.</p>
+      </div>
+
+      <div class="speaking-grid">
+        {speaking.map((topic, i) => (
+          <div class="speaking-item"><span>0{i + 1}</span><p>{topic}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell connect">
+      <div class="section-label">08 / CONNECT</div>
+      <h2>Building something around cloud platforms, modernization or software security?</h2>
+      <p>I’m interested in architecture conversations, technical collaboration, speaking opportunities and ambitious platform problems.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="mailto:sumit.mckv@gmail.com">Start a conversation</a>
+        <a class="button secondary" href="https://www.linkedin.com/in/sumit-mukherjee" target="_blank">LinkedIn ↗</a>
+        <a class="button secondary" href="https://github.com/summu1985" target="_blank">GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+    <span>Designed as a living professional portfolio.</span>
+  </footer>
+</BaseLayout>
