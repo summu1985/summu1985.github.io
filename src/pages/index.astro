@@ -316,8 +316,49 @@ const speaking = [
     </section>
   </main>
 
-  <footer class="shell">
-    <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+<footer class="shell">
+  <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+
+  <div class="footer-meta">
     <span>Designed as a living professional portfolio.</span>
-  </footer>
+
+    <span class="visitor-count" aria-label="Homepage visitor count">
+      <span class="visitor-dot"></span>
+      <span id="visitor-count">Visitors: —</span>
+    </span>
+  </div>
+</footer>
+
+<script
+  data-goatcounter="https://summu1985.goatcounter.com/count"
+  async
+  src="https://gc.zgo.at/count.js">
+</script>
+
+<script is:inline>
+  async function loadVisitorCount() {
+    const counter = document.getElementById('visitor-count');
+    if (!counter) return;
+
+    try {
+      // GoatCounter's public counter endpoint for the homepage path "/".
+      const response = await fetch(
+        'https://summu1985.goatcounter.com/counter/%2F.json'
+      );
+
+      if (!response.ok) {
+        throw new Error(`Counter request failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      counter.textContent = `Visitors: ${data.count}`;
+    } catch (error) {
+      console.warn('Unable to load visitor count.', error);
+      counter.textContent = 'Visitors';
+    }
+  }
+
+  loadVisitorCount();
+</script>
+
 </BaseLayout>
