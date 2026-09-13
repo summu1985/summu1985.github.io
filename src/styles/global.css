@@ -242,6 +242,28 @@ footer {
   font-size: 13px;
 }
 
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.visitor-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.visitor-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px rgba(139, 224, 192, .45);
+}
+
 @media (max-width: 800px) {
   .site-header { grid-template-columns: auto auto; justify-content: space-between; }
   nav { display: none; }
@@ -255,4 +277,9 @@ footer {
   .arrow { display: none; }
   .section { padding: 78px 0; }
   footer { flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; }
+  .footer-meta {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
 }
