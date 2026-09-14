@@ -55,7 +55,6 @@ const projects = [
   }
 ];
 
-
 const povs = [
   {
     number: '01',
@@ -214,18 +213,41 @@ const speaking = [
       </div>
     </section>
 
-
     <section class="section shell" id="povs">
       <div class="section-heading">
         <div>
           <div class="section-label">04 / ARCHITECTURE POVs</div>
-          <h2>Open Enterprise Modernization Blueprints.</h2>
+          <h2>Ideas translated into practical architecture.</h2>
         </div>
         <p>
-          Practical, opinionated guides for recurring enterprise transformation decisions.
-          Each starts with the problem and decision framework first, then maps open-source,
-          Red Hat and ecosystem technologies as pluggable implementation choices.
+          Focused points of view and reusable transformation blueprints that begin with the
+          customer problem and decision framework before mapping technologies.
         </p>
+      </div>
+
+      <article class="featured-pov-card">
+        <div>
+          <div class="pov-status published">PUBLISHED · SEPTEMBER 2026</div>
+          <div class="featured-pov-kicker">INDIA · BANKING · PRIVACY</div>
+          <h3>From Consent Capture to Enforceable Compliance</h3>
+          <p>
+            A practical architecture point of view for Indian banks on turning consent obligations
+            into operational decisions, evidence, runtime enforcement and downstream withdrawal propagation.
+          </p>
+          <div class="tags">
+            <span>DPDP</span>
+            <span>Banking</span>
+            <span>Consent Management</span>
+            <span>API Security</span>
+            <span>Events</span>
+          </div>
+        </div>
+        <a class="button secondary" href="/povs/consent-management/">Explore the POV →</a>
+      </article>
+
+      <div class="blueprint-heading">
+        <div class="section-label">OPEN ENTERPRISE MODERNIZATION BLUEPRINTS</div>
+        <h3>Long-form decision frameworks for recurring transformation themes.</h3>
       </div>
 
       <div class="pov-intro">
@@ -316,49 +338,47 @@ const speaking = [
     </section>
   </main>
 
-<footer class="shell">
-  <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+  <footer class="shell">
+    <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
 
-  <div class="footer-meta">
-    <span>Designed as a living professional portfolio.</span>
+    <div class="footer-meta">
+      <span>Designed as a living professional portfolio.</span>
 
-    <span class="visitor-count" aria-label="Homepage visitor count">
-      <span class="visitor-dot"></span>
-      <span id="visitor-count">Visitors: —</span>
-    </span>
-  </div>
-</footer>
+      <span class="visitor-count" aria-label="Homepage visitor count">
+        <span class="visitor-dot"></span>
+        <span id="visitor-count">Visitors: —</span>
+      </span>
+    </div>
+  </footer>
 
-<script
-  data-goatcounter="https://summu1985.goatcounter.com/count"
-  async
-  src="https://gc.zgo.at/count.js">
-</script>
+  <script
+    data-goatcounter="https://summu1985.goatcounter.com/count"
+    async
+    src="https://gc.zgo.at/count.js">
+  </script>
 
-<script is:inline>
-  async function loadVisitorCount() {
-    const counter = document.getElementById('visitor-count');
-    if (!counter) return;
+  <script is:inline>
+    async function loadVisitorCount() {
+      const counter = document.getElementById('visitor-count');
+      if (!counter) return;
 
-    try {
-      // GoatCounter's public counter endpoint for the homepage path "/".
-      const response = await fetch(
-        'https://summu1985.goatcounter.com/counter/%2F.json'
-      );
+      try {
+        const response = await fetch(
+          'https://summu1985.goatcounter.com/counter/%2F.json'
+        );
 
-      if (!response.ok) {
-        throw new Error(`Counter request failed: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Counter request failed: ${response.status}`);
+        }
+
+        const data = await response.json();
+        counter.textContent = `Visitors: ${data.count}`;
+      } catch (error) {
+        console.warn('Unable to load visitor count.', error);
+        counter.textContent = 'Visitors';
       }
-
-      const data = await response.json();
-      counter.textContent = `Visitors: ${data.count}`;
-    } catch (error) {
-      console.warn('Unable to load visitor count.', error);
-      counter.textContent = 'Visitors';
     }
-  }
 
-  loadVisitorCount();
-</script>
-
+    loadVisitorCount();
+  </script>
 </BaseLayout>

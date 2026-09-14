@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const capabilities = [
+  ['Notice & purpose catalogue', 'Govern notices, purposes, data categories, recipients, validity and versions.'],
+  ['Omnichannel capture', 'Capture consistent consent evidence across mobile, web, branch, contact centre and partner journeys.'],
+  ['Consent registry', 'Maintain a trusted state of granted, denied, withdrawn and expired consent.'],
+  ['Decision service', 'Allow applications to check whether a specific data use is permitted at runtime.'],
+  ['Enforcement', 'Combine identity, authorization, consent and policy conditions before allowing an operation.'],
+  ['Withdrawal propagation', 'Distribute consent changes to downstream applications, processors and partners.'],
+  ['Rights & grievance support', 'Support customer review, withdrawal, correction, erasure where applicable and grievance handling.'],
+  ['Audit & evidence', 'Reconstruct the notice, action, decision, policy and downstream response.']
+];
+
+const tech = [
+  ['Application platform', 'Red Hat OpenShift'],
+  ['Identity', 'Red Hat build of Keycloak or existing IAM'],
+  ['API enforcement', 'Red Hat Connectivity Link'],
+  ['Consent record', 'Commercial CMP or custom consent service'],
+  ['Integration', 'Red Hat Application Foundations / Apache Camel'],
+  ['Events', 'Red Hat AMQ Streams for Apache Kafka'],
+  ['Security', 'Red Hat Advanced Cluster Security and platform controls'],
+  ['Evidence', 'Existing audit, observability, SIEM and GRC systems']
+];
+
+const discovery = [
+  'Where and how is consent captured today?',
+  'Can the exact notice and purpose accepted by a customer be reproduced?',
+  'Which activities rely on consent and which rely on another processing basis?',
+  'How are offline and legacy consents reconciled?',
+  'Can applications validate consent before processing?',
+  'How is withdrawal propagated to downstream systems and partners?',
+  'Which retention duties override erasure?',
+  'Who owns purposes and notice changes?',
+  'What latency and propagation objectives apply?',
+  'Is the preferred model build, buy or hybrid?'
+];
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="/">SM</a>
+    <nav aria-label="Main navigation">
+      <a href="/#work">Work</a>
+      <a href="/#povs">POVs</a>
+      <a href="/#security">Security</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#speaking">Speaking</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a>
+  </header>
+
+  <main id="top">
+    <section class="pov-hero shell">
+      <div class="eyebrow">ARCHITECTURE POV · INDIA · BANKING · PRIVACY</div>
+      <h1>From Consent Capture to <span>Enforceable Compliance.</span></h1>
+      <p class="hero-copy">
+        A practical architecture point of view for Indian banks on turning DPDP consent obligations
+        into operational decisions, propagation and evidence.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#pov">Read the POV</a>
+        <a class="button secondary" href="/povs/consent-management/DPDP_Consent_Reference_Architecture.pdf" target="_blank">Reference architecture ↗</a>
+      </div>
+      <div class="tags pov-tags">
+        <span>DPDP</span>
+        <span>Banking</span>
+        <span>Consent Management</span>
+        <span>API Security</span>
+        <span>Event-Driven Architecture</span>
+      </div>
+    </section>
+
+    <section class="section shell pov-thesis" id="pov">
+      <div class="section-label">THE ARCHITECTURE POSITION</div>
+      <blockquote>
+        The objective is not to centralise every customer interaction. It is to establish a reliable,
+        enterprise-wide consent state that every channel and processing system can consume and enforce.
+      </blockquote>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">01 / THE PROBLEM</div>
+          <h2>Consent exists. The control often does not.</h2>
+        </div>
+        <p>Fragmented capture is only the visible problem; the deeper issue is fragmented evidence and enforcement.</p>
+      </div>
+
+      <div class="cards four">
+        <article class="card"><span class="card-number">01</span><h3>Fragmented evidence</h3><p>No consistent proof of who agreed to what, for which purpose and under which notice.</p></article>
+        <article class="card"><span class="card-number">02</span><h3>Disconnected enforcement</h3><p>Identity and entitlement do not necessarily prove that a specific use of personal data is permitted.</p></article>
+        <article class="card"><span class="card-number">03</span><h3>Slow withdrawal propagation</h3><p>A change in one system does not automatically stop processing elsewhere.</p></article>
+        <article class="card"><span class="card-number">04</span><h3>Limited observability</h3><p>Privacy, risk and audit teams struggle to trace a customer action to downstream outcomes.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">02 / DESIGN PRINCIPLES</div>
+          <h2>Separate the decisions. Keep the platform replaceable.</h2>
+        </div>
+      </div>
+      <div class="pov-principles">
+        <div><strong>Purpose before product</strong><span>Model purposes, data, recipients, basis and evidence first.</span></div>
+        <div><strong>Consent at runtime</strong><span>Use consent while processing, not only during audit.</span></div>
+        <div><strong>Events for change</strong><span>Treat withdrawal and expiry as enterprise events.</span></div>
+        <div><strong>Loose coupling</strong><span>Shield channels from consent-vendor interfaces.</span></div>
+        <div><strong>Evidence by design</strong><span>Correlate notice, action, decision and downstream response.</span></div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">03 / CAPABILITY MODEL</div>
+          <h2>Eight capabilities turn consent into an enterprise service.</h2>
+        </div>
+      </div>
+      <div class="cards four">
+        {capabilities.map(([title, text], i) => (
+          <article class="card">
+            <span class="card-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">04 / FOUR DISTINCT DECISIONS</div>
+          <h2>Authentication is not proof of consent.</h2>
+        </div>
+      </div>
+      <div class="decision-flow">
+        <div><span>IDENTITY</span><strong>Who is making the request?</strong></div>
+        <b>→</b>
+        <div><span>AUTHORIZATION</span><strong>What are they technically entitled to do?</strong></div>
+        <b>→</b>
+        <div><span>CONSENT</span><strong>Has this data use been permitted?</strong></div>
+        <b>→</b>
+        <div><span>ENFORCEMENT</span><strong>Should this operation proceed now?</strong></div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">05 / LOGICAL ARCHITECTURE</div>
+          <h2>A consent control plane between customer choice and downstream processing.</h2>
+        </div>
+      </div>
+      <div class="architecture-stack">
+        <div>Customer channels <small>Mobile · web · branch · contact centre · partner journeys</small></div>
+        <span>↓</span>
+        <div>Identity <small>Customer IAM · workforce IAM · client identity</small></div>
+        <span>↓</span>
+        <div class="accent-box">API and policy enforcement <small>Authentication · routing · external decision</small></div>
+        <span>↓</span>
+        <div>Enterprise consent platform <small>Catalogue · capture · registry · decision API · withdrawal · evidence</small></div>
+        <span>↓</span>
+        <div>Events and integration <small>Streaming · integration · retries · acknowledgements · reconciliation</small></div>
+        <span>↓</span>
+        <div>Bank and partner estate <small>CBS · lending · cards · CRM · data lake · AI · processors</small></div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">06 / IMPLEMENTATION MAPPING</div>
+          <h2>One implementation, not the architecture.</h2>
+        </div>
+        <p>Architectural roles should stay stable even when products change.</p>
+      </div>
+      <div class="tech-table">
+        {tech.map(([role, option]) => (
+          <div class="tech-row"><strong>{role}</strong><span>{option}</span></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">07 / RUNTIME DECISION</div>
+          <h2>Decide and enforce while processing.</h2>
+        </div>
+      </div>
+      <div class="runtime-grid">
+        <div class="runtime-flow">
+          {['Authenticate','Authorize','Classify','Decide','Enforce','Record'].map((step, i) => (
+            <div><span>{i + 1}</span><strong>{step}</strong></div>
+          ))}
+        </div>
+
+        <div class="decision-example">
+          <div class="section-label">EXAMPLE DECISION CONTEXT</div>
+          <code>Subject: CUST-12345
+Requester: FINTECH-X
+Purpose: CREDIT-ASSESSMENT
+Data: TRANSACTION-HISTORY
+Action: SHARE
+Basis: CONSENT
+Consent: ACTIVE + MATCHED
+
+Decision: PERMIT</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">08 / WITHDRAWAL</div>
+          <h2>Withdrawal is an enterprise event.</h2>
+        </div>
+        <p>A registry update becomes operational only when affected processing stops or another valid basis is applied.</p>
+      </div>
+      <div class="event-flow">
+        {['Withdraw','Publish','Distribute','Act','Acknowledge','Reconcile'].map((step, i) => (
+          <div><span>{i + 1}</span><strong>{step}</strong></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">09 / BUILD, BUY OR HYBRID</div>
+          <h2>Choose deliberately.</h2>
+        </div>
+      </div>
+      <div class="cards three">
+        <article class="card"><span class="status">BUY</span><h3>Speed first</h3><p>Prioritise mature workflows and vendor accountability.</p></article>
+        <article class="card"><span class="status">BUILD</span><h3>Control first</h3><p>Prioritise differentiation, control and integration flexibility.</p></article>
+        <article class="card featured-choice"><span class="status">HYBRID</span><h3>Balanced control</h3><p>Combine mature consent operations with bank-owned enforcement and integration.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">10 / ADOPTION ROADMAP</div>
+          <h2>Move from inventory to assurance.</h2>
+        </div>
+      </div>
+      <div class="roadmap">
+        {['Discover','Govern','Pilot','Scale','Assure'].map((step, i) => (
+          <div><span>{i + 1}</span><strong>{step}</strong></div>
+        ))}
+      </div>
+
+      <div class="discovery-grid">
+        {discovery.map((q, i) => (
+          <div><span>{String(i + 1).padStart(2, '0')}</span><p>{q}</p></div>
+        ))}
+      </div>
+    </section>
+
+    <section class="section shell resources">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">11 / RESOURCES</div>
+          <h2>Read, download and reuse.</h2>
+        </div>
+      </div>
+      <div class="resource-grid">
+        <article class="resource-card">
+          <span>ARCHITECTURE POV</span>
+          <h3>From Consent Capture to Enforceable Compliance</h3>
+          <p>The complete written point of view for Indian banks.</p>
+          <a href="/povs/consent-management/dpdp-consent-management-pov.md" target="_blank">View full text ↗</a>
+        </article>
+
+        <article class="resource-card">
+          <span>REFERENCE ARCHITECTURE · 9 PAGES</span>
+          <h3>Consent Becomes an Enterprise Control</h3>
+          <p>Detailed design principles, architecture, runtime pattern and adoption roadmap.</p>
+          <a href="/povs/consent-management/DPDP_Consent_Reference_Architecture.pdf" target="_blank">Open PDF ↗</a>
+        </article>
+      </div>
+
+      <p class="disclaimer">
+        This material is an architecture and transformation perspective, not legal advice.
+        Regulatory applicability and implementation should be validated with legal, privacy,
+        compliance and risk teams.
+      </p>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+    <span>Architecture Point of View · September 2026</span>
+  </footer>
+</BaseLayout>
