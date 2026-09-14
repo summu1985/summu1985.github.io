@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const accessSteps = [
+  ['Activate', 'Manager selects an eligible worker and approves a bounded access profile and validity window.'],
+  ['Verify', 'The registered worker, eligibility status and active entitlement are checked.'],
+  ['Authenticate', 'OTP or another accepted factor verifies the worker.'],
+  ['Broker', 'Trusted identity and entitlement claims are mapped into a bounded application identity.'],
+  ['Enforce', 'Applications and APIs permit only the approved functions and context.'],
+  ['Expire', 'Refresh and access stop automatically at expiry or immediate revocation.']
+];
+
+const controls = [
+  ['Bound token lifetime', "Token expiry should never exceed the entitlement's valid-until value."],
+  ['Stop refresh', 'Deny refresh or token exchange after the entitlement expires.'],
+  ['Re-check when needed', 'Sensitive operations can validate current entitlement at a policy point.'],
+  ['Early revocation', 'A manager can end access before the planned assignment end.'],
+  ['Worker blocking', 'Lost phone, worker removal or suspected misuse needs an immediate deny path.'],
+  ['Future eligibility remains', 'Expiry removes current authorization without deleting future eligibility.']
+];
+
+const security = [
+  ['Worker verification', 'Register and verify workers before eligibility.'],
+  ['OTP protection', 'Throttle attempts and protect against replay and abuse.'],
+  ['Least privilege', 'Use server-side authorization; UI visibility is not a security boundary.'],
+  ['Audit correlation', 'Record approver, reason, profile, worker, entitlement and application action.'],
+  ['Data minimisation', 'Mask phone numbers and disclose only required claims.'],
+  ['Risk-based step-up', 'Use a managed device, passkey, stronger factor or supervisor confirmation where needed.']
+];
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="/">SM</a>
+    <nav aria-label="Main navigation">
+      <a href="/#work">Work</a><a href="/#povs">POVs</a><a href="/#security">Security</a>
+      <a href="/#projects">Projects</a><a href="/#speaking">Speaking</a><a href="/#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a>
+  </header>
+
+  <main id="top">
+    <section class="pov-hero shell">
+      <div class="eyebrow">ARCHITECTURE POV · IDENTITY SECURITY · ZERO TRUST</div>
+      <h1>The <span>8-Hour Identity.</span></h1>
+      <p class="hero-copy">Just-in-time access for temporary workers without permanent enterprise accounts. Establish identity when needed, approve access for a bounded task, and make authorization disappear automatically.</p>
+      <p class="pov-publish-date"><span>Published</span> · <time datetime="2026-09-13">13 September 2026</time></p>
+      <div class="hero-actions">
+        <a class="button primary" href="#pov">Read the POV</a>
+        <a class="button secondary" href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Reference architecture ↗</a>
+      </div>
+      <div class="tags pov-tags"><span>Identity Security</span><span>Zero Trust</span><span>JIT Access</span><span>Keycloak</span><span>RBAC</span><span>ABAC</span></div>
+    </section>
+
+    <section class="section shell pov-thesis" id="pov">
+      <div class="section-label">THE ARCHITECTURE POSITION</div>
+      <blockquote>Do not confuse a temporary task with a permanent entitlement. Establish identity when needed, approve access just in time, enforce least privilege, and make authorization disappear automatically.</blockquote>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">01 / THE PROBLEM</div><h2>The requirement is not “create a user.”</h2></div><p>A temporary worker may need one application, for one purpose, at one location, for one shift. A permanent enterprise account creates more lifecycle than the business requirement actually needs.</p></div>
+      <div class="cards three">
+        <article class="card"><span class="card-number">01</span><h3>The trigger</h3><p>A temporary worker needs limited application access for one assignment.</p></article>
+        <article class="card"><span class="card-number">02</span><h3>The constraint</h3><p>No corporate directory account and no shift-management platform.</p></article>
+        <article class="card"><span class="card-number">03</span><h3>The outcome</h3><p>A bounded, auditable entitlement that expires without manual cleanup.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">02 / FOUR SEPARATE DECISIONS</div><h2>A successful OTP is not authorization.</h2></div><p>Authentication proves a factor. It does not prove worker eligibility or today’s business entitlement.</p></div>
+      <div class="decision-flow">
+        <div><span>IDENTITY</span><strong>Who is this person?</strong></div><b>→</b>
+        <div><span>AUTHENTICATION</span><strong>Can they prove an accepted factor?</strong></div><b>→</b>
+        <div><span>ELIGIBILITY</span><strong>Are they in the approved worker pool?</strong></div><b>→</b>
+        <div><span>ENTITLEMENT</span><strong>May they perform this function now?</strong></div>
+      </div>
+      <div class="decision-example jit-callout"><div class="section-label">TEMPORARY ACCESS DECISION</div><h3>Verified phone + approved worker + active entitlement + permitted context = temporary application access</h3></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">03 / REFERENCE ARCHITECTURE</div><h2>Keep the business decision separate from the identity broker.</h2></div></div>
+      <div class="architecture-stack">
+        <div>Office manager <small>Activates worker · profile · location · validity · reason</small></div><span>↓</span>
+        <div class="accent-box">Temporary access service <small>Approval · entitlement · expiry · revocation</small></div><span>↓</span>
+        <div>Eligibility registry <small>Minimal approved-worker record and status</small></div><span>↓</span>
+        <div>OTP / identity service <small>Factor verification · trusted identity assertion</small></div><span>↓</span>
+        <div class="accent-box">Identity broker / Keycloak <small>Trusted claim mapping · bounded session · token issuance</small></div><span>↓</span>
+        <div>Applications / APIs <small>Server-side role · scope · context · expiry enforcement</small></div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">04 / ACCESS JOURNEY</div><h2>Create an expiring entitlement — not a permanent employee account.</h2></div></div>
+      <div class="runtime-flow">{accessSteps.map(([title,text],i)=>(<div><span>{i+1}</span><strong>{title}</strong><small>{text}</small></div>))}</div>
+      <div class="decision-example jit-callout"><div class="section-label">EXAMPLE MANAGER ACTIVATION</div><code>Worker: TMP-1042 · Mobile ending 4812
+Access profile: Reception Desk
+Location: Reception-01
+Valid until: Today, 5:00 PM
+Reason: Front-desk coverage
+
+[ Activate access ]</code></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">05 / CLAIMS & AUTHORIZATION</div><h2>Use trusted context to constrain familiar application permissions.</h2></div></div>
+      <div class="tech-table">
+        <div class="tech-row"><strong>access_profile = reception</strong><span>Allow query creation, lookup and permitted updates.</span></div>
+        <div class="tech-row"><strong>worker_type = temporary</strong><span>Deny administration and privileged workflows.</span></div>
+        <div class="tech-row"><strong>location = reception-01</strong><span>Limit access to the assigned desk or site where applicable.</span></div>
+        <div class="tech-row"><strong>active entitlement_id</strong><span>Require an approved, auditable assignment.</span></div>
+        <div class="tech-row"><strong>valid_until</strong><span>Reject access beyond the approved window.</span></div>
+      </div>
+      <div class="decision-example"><div class="section-label">AUTHORIZATION MODEL</div><h3>Attribute-based context feeding a constrained RBAC profile.</h3><p>Only trusted server-side components should supply claims that influence authorization.</p></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">06 / EXPIRY & REVOCATION</div><h2>Expiry must be enforced, not merely displayed.</h2></div><p>Each assignment can end at a different time, so session configuration alone is not sufficient.</p></div>
+      <div class="cards three">{controls.map(([title,text],i)=>(<article class="card"><span class="card-number">{String(i+1).padStart(2,'0')}</span><h3>{title}</h3><p>{text}</p></article>))}</div>
+      <div class="decision-example jit-callout"><div class="section-label">SECURITY OUTCOME</div><h3>The worker may remain known to the organisation while having zero standing access between assignments.</h3></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">07 / IMPLEMENTATION PROFILE</div><h2>One implementation, not the architecture.</h2></div><p>Keycloak can implement the identity-broker role, but the stable architecture roles should survive a product change.</p></div>
+      <div class="cards three">
+        <article class="card"><h3>OIDC identity brokering</h3><p>Consume a trusted assertion from the temporary identity service.</p></article>
+        <article class="card"><h3>Trusted claim mapping</h3><p>Map validated business context into application-facing claims.</p></article>
+        <article class="card"><h3>Bounded sessions</h3><p>Keep access-token, SSO and client sessions consistent with temporary access.</p></article>
+        <article class="card"><h3>Client scopes</h3><p>Avoid disclosing unnecessary worker attributes.</p></article>
+        <article class="card"><h3>No offline access</h3><p>Do not create long-lived offline access for temporary-worker clients.</p></article>
+        <article class="card"><h3>Transient where compatible</h3><p>Avoid unnecessary persistence when the broker flow and required features support it.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">08 / SECURITY BASELINE</div><h2>Low friction should not mean low assurance.</h2></div></div>
+      <div class="cards three">{security.map(([title,text],i)=>(<article class="card"><span class="card-number">{String(i+1).padStart(2,'0')}</span><h3>{title}</h3><p>{text}</p></article>))}</div>
+      <div class="decision-example jit-callout"><div class="section-label">IMPORTANT</div><h3>SMS OTP is a convenience mechanism, not a universal assurance level.</h3><p>Authentication strength should match the sensitivity of the data and actions exposed. The reusable pattern is identity + eligibility + entitlement + enforcement, not SMS itself.</p></div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">09 / ALTERNATIVES & TRADE-OFFS</div><h2>Choose the operating model deliberately.</h2></div></div>
+      <div class="cards three">
+        <article class="card"><span class="status">LOWER CONTROL</span><h3>Eligible pool always available</h3><p>Lowest daily overhead, but an approved worker who is not on duty may still attempt authentication.</p></article>
+        <article class="card featured-choice"><span class="status">RECOMMENDED</span><h3>Manager activates on arrival</h3><p>One deliberate approval action gives a strong balance of operational simplicity, context and auditability.</p></article>
+        <article class="card"><span class="status">LEGACY FALLBACK</span><h3>Provision and delete</h3><p>Use when application constraints require a durable account and explicitly manage orphaned-access risk.</p></article>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="section-heading"><div><div class="section-label">10 / ARCHITECTURE DECISION & PROOF</div><h2>Test the controls, not just the login screen.</h2></div></div>
+      <div class="decision-example"><div class="section-label">ARCHITECT'S TAKEAWAY</div><h3>Do not ask how quickly you can create and delete a temporary account. Ask whether access can exist only for the task, context and time for which it was approved.</h3></div>
+    </section>
+
+    <section class="section shell resources">
+      <div class="section-heading"><div><div class="section-label">11 / RESOURCES</div><h2>Read and download.</h2></div></div>
+      <div class="resource-grid">
+        <article class="resource-card"><span>ARCHITECTURE POV</span><h3>The 8-Hour Identity</h3><p>The complete written architecture point of view.</p><a href="/povs/8-hour-identity/The_8-Hour_Identity_Architecture_POV.md" target="_blank">View full text ↗</a></article>
+        <article class="resource-card"><span>REFERENCE ARCHITECTURE</span><h3>The 8-Hour Identity</h3><p>Detailed access-decision model, logical architecture, authorization pattern and expiry controls.</p><a href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Open PDF ↗</a></article>
+      </div>
+      <p class="disclaimer">This is an independent architecture Point of View. Product names illustrate possible implementations and do not imply endorsement or representation by any employer or vendor.</p>
+    </section>
+  </main>
+
+  <footer class="shell"><span>© {new Date().getFullYear()} Sumit Mukherjee</span><span>Architecture Point of View · Published 14 September 2026</span></footer>
+
+  <style>
+    /*
+     * Normalize the four highlighted callout tiles on this POV only.
+     * Keeps outer padding and inner vertical rhythm consistent.
+     */
+    .jit-callout {
+      width: 100%;
+      margin-top: 32px;
+      padding: 32px;
+      border-radius: 12px;
+    }
+
+    .jit-callout > .section-label {
+      margin: 0;
+    }
+
+    .jit-callout > h3 {
+      margin: 16px 0 0;
+      line-height: 1.25;
+    }
+
+    .jit-callout > p {
+      margin: 16px 0 0;
+    }
+
+    .jit-callout > code {
+      margin: 16px 0 0;
+    }
+
+    @media (max-width: 720px) {
+      .jit-callout {
+        margin-top: 24px;
+        padding: 24px;
+      }
+    }
+  </style>
+
+</BaseLayout>
