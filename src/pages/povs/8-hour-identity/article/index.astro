@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="/">SM</a>
+    <nav aria-label="Main navigation">
+      <a href="/#work">Work</a><a href="/#povs">POVs</a><a href="/#security">Security</a>
+      <a href="/#projects">Projects</a><a href="/#speaking">Speaking</a><a href="/#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a>
+  </header>
+  <main>
+    <section class="article-hero shell">
+      <div class="eyebrow">ARCHITECTURE · IDENTITY SECURITY · ZERO TRUST</div>
+      <p class="article-back"><a href="/povs/8-hour-identity/">← The 8-Hour Identity POV</a></p>
+      <h1>The 8-Hour Identity: <span>Designing access that exists only as long as the work does.</span></h1>
+      <p class="article-deck">How to give temporary workers secure, auditable application access without turning every short-term assignment into a permanent identity-lifecycle problem.</p>
+      <div class="article-meta">Sumit Mukherjee · 14 September 2026 · Architecture article</div>
+    </section>
+    <article class="article-body shell">
+<p class="article-deck-inline"><strong>How to give temporary workers secure, auditable application access without turning every short-term assignment into a permanent identity-lifecycle problem</strong></p>
+<p>Most enterprise identity architectures begin with a reasonable assumption: a user exists before they need access.</p>
+<p>The employee joins the organisation, an identity is created, roles are assigned, applications consume that identity, and eventually an offboarding process removes the access. That model works reasonably well for permanent employees.</p>
+<p>But what happens when the person who needs access is not really an employee at all?</p>
+<p>Consider a reception desk, service counter, warehouse, event facility or branch office that uses a pool of temporary workers. Any available person from that pool may be assigned to the desk on a particular day. They need access to a small number of applications for perhaps six or eight hours.</p>
+<p>There may be no workforce scheduling system telling IT who is working that day. The organisation may know the worker&#x27;s phone number and may be able to authenticate them using an OTP, but it does not want to create and maintain a conventional enterprise account for every possible temporary worker.</p>
+<p>At first glance, this looks like an identity-provisioning problem. I think that is the wrong place to start.</p>
+<blockquote>Can access exist only for the task, context and time for which it was approved?</blockquote>
+<h2>A phone number is not an entitlement</h2>
+<p>A successful OTP gives us reasonable evidence that the person currently controls that phone number. It does not necessarily establish that the person is an approved worker, is expected to work today, is assigned to this location, should have access to this application, or should retain that authorization for the next eight hours.</p>
+<p>I separate the problem into four questions:</p>
+<ul>
+<li><strong>Identity:</strong> Who is this person?</li>
+<li><strong>Authentication:</strong> Can the person prove control of an accepted authentication factor?</li>
+<li><strong>Eligibility:</strong> Is the person part of the organisation&#x27;s approved temporary-worker population?</li>
+<li><strong>Entitlement:</strong> Is this person authorized to perform this particular function now?</li>
+</ul>
+<p>OTP answers the authentication question. It should not answer all four.</p>
+<h2>What I would make temporary is the entitlement</h2>
+<p>It is tempting to say that the worker&#x27;s identity should exist for only eight hours. But the organisation may legitimately want to remember that <code>TMP-1042</code> is an approved member of its temporary-worker pool and retain historical audit evidence.</p>
+<p>What should disappear after today&#x27;s assignment is not necessarily the worker&#x27;s identity. It is the worker&#x27;s <strong>authorization to perform today&#x27;s job</strong>.</p>
+<pre><code>Worker
+  |
+  +-- Identity / eligibility
+  |     TMP-1042
+  |     Approved temporary worker
+  |
+  +-- Today&#x27;s entitlement
+        Reception Desk
+        Reception-01
+        Valid until 17:00
+        Approved by Manager-X</code></pre>
+<p>At 17:00, the second part disappears. The worker may remain known to the organisation while having <strong>zero standing application access</strong>.</p>
+<blockquote>Make authorization live for the duration of the work, rather than making access a permanent property of the person.</blockquote>
+<h2>But who says the worker is actually working today?</h2>
+<p>When there is no shift-management or workforce-scheduling system, something still has to establish today&#x27;s business context.</p>
+<p>The simplest pattern I would use is <strong>manager activation on arrival</strong>.</p>
+<pre><code>Worker: TMP-1042
+Access profile: Reception Desk
+Location: Reception-01
+Valid until: 17:00
+Reason: Front-desk coverage
+
+[ Activate access ]</code></pre>
+<p>That action creates an expiring entitlement and records why the access existed: who approved it, for whom, for which function, where, for how long and for what reason.</p>
+<h2>The identity broker should not become the scheduling system</h2>
+<pre><code>Office Manager
+      |
+      v
+Temporary Access Service
+      |
+      +------&gt; Eligibility Registry
+      |
+      v
+OTP / Identity Service
+      |
+      v
+Identity Broker
+      |
+      v
+Applications / APIs</code></pre>
+<p>The temporary access service answers whether the worker currently has an active entitlement. The identity service answers whether the worker successfully authenticated. The identity broker combines trusted context and produces the identity representation required by applications. The applications ultimately enforce the permitted operations.</p>
+<p>I would resist turning an IAM platform into a custom shift-management database merely because it can store users and attributes.</p>
+<h2>What should the application actually receive?</h2>
+<pre><code>worker_id      = TMP-1042
+worker_type    = temporary
+access_profile = reception
+location       = reception-01
+entitlement_id = ENT-78431
+valid_until    = 2026-09-14T17:00:00+05:30</code></pre>
+<p><strong>RBAC</strong> describes what a reception worker normally does. <strong>Contextual attributes</strong> describe whether this particular worker should have that role now.</p>
+<blockquote>Attribute-based context feeds a constrained RBAC profile.</blockquote>
+<p>Claims that influence authorization must come from trusted server-side components. A browser must never self-declare role, location, approval or expiry and have those values accepted as authoritative.</p>
+<h2>Expiry is harder than putting an end time on the screen</h2>
+<p>Displaying an expiry time does not enforce anything. Neither does merely configuring a generic eight-hour SSO session.</p>
+<p>The access token should not remain useful beyond the approved entitlement window. Refresh or token exchange should not silently extend authorization beyond it. Higher-risk operations may need to re-evaluate current entitlement, and the architecture needs an explicit early-revocation path.</p>
+<blockquote>Session lifetime is a technical setting; entitlement lifetime is a business authorization decision.</blockquote>
+<h2>Where Keycloak fits</h2>
+<p>One implementation of the identity-broker role could use Keycloak. Relevant capabilities include OIDC identity brokering, trusted claim mapping, bounded sessions, client scopes and appropriate token lifetimes. Where compatible, transient identity handling can help avoid unnecessary persistent broker-side users.</p>
+<p>But I would not make &quot;no persistent Keycloak user&quot; the architectural objective.</p>
+<p>The real objective is <strong>no unnecessary standing authorization</strong>.</p>
+<p>If a particular integration or supportability requirement needs a minimal durable identity representation, that can still be compatible with the architecture as long as the entitlement itself remains explicitly bounded and expires correctly.</p>
+<h2>SMS OTP needs some caution</h2>
+<p>OTP makes this use case operationally attractive because temporary workers do not need corporate passwords. But SMS OTP should not automatically be treated as a high-assurance authentication mechanism.</p>
+<p>Authentication strength should match the risk of the application and actions being exposed.</p>
+<p>The reusable pattern is <strong>identity + authentication + eligibility + time-bound entitlement + enforcement</strong>.</p>
+<h2>What would I audit?</h2>
+<p>For every activation, I would want to answer:</p>
+<ul>
+<li>Who approved the access?</li>
+<li>Who received it?</li>
+<li>Why was it required?</li>
+<li>Which access profile was granted?</li>
+<li>Where was it valid?</li>
+<li>When did it begin?</li>
+<li>When should it expire?</li>
+<li>Was it revoked early?</li>
+<li>Which applications were accessed?</li>
+<li>Which significant operations were performed?</li>
+</ul>
+<p>An entitlement identifier provides a useful correlation point across approval, identity and application activity.</p>
+<h2>There isn&#x27;t one operating model</h2>
+<p>At the lowest-control end, the whole approved worker pool can remain eligible to authenticate with strong contextual restrictions.</p>
+<p>The middle option is <strong>manager activation on arrival</strong>. For the scenario that prompted this architecture, this is the model I prefer because it introduces one deliberate approval action without requiring a complete workforce-management platform.</p>
+<p>At the other end is conventional <strong>provision and delete</strong> for legacy applications that require durable accounts.</p>
+<p>Architecture should acknowledge these constraints rather than pretend every application is modern.</p>
+<h2>The demo I would build</h2>
+<p>A useful proof should test more than whether the OTP login page works.</p>
+<p>Activate a worker for a bounded reception profile, authenticate, demonstrate permitted operations, return <code>403 Forbidden</code> for administration or bulk export, revoke the entitlement while the worker is signed in, repeat with automatic expiry, and correlate approval, entitlement, worker identity and application activity in the audit trail.</p>
+<p>A successful OTP demonstrates only authentication. This demonstrates the architecture.</p>
+<h2>The broader pattern is more interesting than the reception desk</h2>
+<p>The pattern can apply to contractors working during maintenance windows, engineers temporarily supporting production incidents, vendor technicians, seasonal workers, partner users participating in short projects, or employees receiving elevated privileges for one administrative task.</p>
+<blockquote>Why should authorization exist longer than the business activity that justified it?</blockquote>
+<p>That connects this temporary-worker problem to a broader security principle: reducing standing privilege.</p>
+<h2>One final thought</h2>
+<p>Identity systems have traditionally become very good at answering <strong>Who is the user?</strong></p>
+<p>Enterprise IAM then became better at answering <strong>What roles does the user have?</strong></p>
+<p>I think an increasingly important question is:</p>
+<p><strong>Why does this user have this access right now, and when should it stop being true?</strong></p>
+<p>For temporary workers, that question is obvious because the assignment may last only eight hours. But perhaps that is precisely why the use case is useful.</p>
+<p>It forces us to treat authorization as something that can be <strong>temporary, contextual and deliberately perishable</strong> rather than a property that quietly accumulates around an identity.</p>
+<p>And that may be the more reusable architectural idea behind the 8-Hour Identity.</p>
+<div class="article-disclaimer">This article presents an architecture and security perspective. Authentication strength, identity assurance, authorization controls, audit requirements and implementation choices should be validated against the organisation&#x27;s risk profile, regulatory obligations and application architecture.</div>
+      <div class="article-actions">
+        <a class="button primary" href="/povs/8-hour-identity/">Explore the architecture POV</a>
+        <a class="button secondary" href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Open reference architecture →</a>
+      </div>
+    </article>
+  </main>
+  <footer class="shell"><span>© {new Date().getFullYear()} Sumit Mukherjee</span><span>Independent architecture point of view.</span></footer>
+  <style>
+    .article-hero { padding:96px 0 72px;border-bottom:1px solid var(--line); }
+    .article-back { margin:24px 0 0;color:var(--accent);font-weight:600; }
+    .article-hero h1 { max-width:1050px;margin:20px 0 24px;font-size:clamp(44px,6vw,78px);line-height:1.08; }
+    .article-hero h1 span { color:#8d9baa; }
+    .article-deck { max-width:820px;color:#b7c3ce;font-size:clamp(19px,2vw,23px);line-height:1.5; }
+    .article-meta { margin-top:28px;color:var(--muted);font-size:14px; }
+    .article-hero p, .article-meta { text-align:left; }
+    .article-body { max-width:900px;padding-top:72px;padding-bottom:96px; }
+    .article-body p,.article-body li { max-width:780px;color:#c5cfd7;font-size:18px;line-height:1.7;text-align:justify;text-justify:inter-word; }
+    .article-body p { margin:0 0 24px; }
+    .article-body h2 { max-width:820px;margin:72px 0 24px;font-size:clamp(30px,4vw,46px);line-height:1.15; }
+    .article-body blockquote { max-width:820px;margin:40px 0;padding:24px 28px;border-left:4px solid var(--accent);background:#18232d;color:var(--text);font-family:var(--font-display);font-size:clamp(23px,3vw,32px);font-weight:650;line-height:1.3; }
+    .article-body pre { max-width:780px;overflow-x:auto;margin:32px 0;padding:24px;border:1px solid #34424e;border-radius:12px;background:#18232d;color:var(--text);font-size:14px;line-height:1.55; }
+    .article-body code { color:var(--accent-2); }
+    .article-body ul { max-width:780px;margin:0 0 32px;padding-left:24px; }
+    .article-body li { margin:8px 0; }
+    .article-deck-inline { display:none; }
+    .article-disclaimer { max-width:820px;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;line-height:1.6; }
+    .article-actions { display:flex;flex-wrap:wrap;gap:16px;margin-top:32px; }
+  </style>
+</BaseLayout>

@@ -44,7 +44,7 @@ const security = [
       <div class="eyebrow">ARCHITECTURE POV · IDENTITY SECURITY · ZERO TRUST</div>
       <h1>The <span>8-Hour Identity.</span></h1>
       <p class="hero-copy">Just-in-time access for temporary workers without permanent enterprise accounts. Establish identity when needed, approve access for a bounded task, and make authorization disappear automatically.</p>
-      <p class="pov-publish-date"><span>Published</span> · <time datetime="2026-09-13">13 September 2026</time></p>
+      <p class="pov-publish-date"><span>Published</span> · <time datetime="2026-09-14">14 September 2026</time></p>
       <div class="hero-actions">
         <a class="button primary" href="#pov">Read the POV</a>
         <a class="button secondary" href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Reference architecture ↗</a>
@@ -153,9 +153,27 @@ Reason: Front-desk coverage
 
     <section class="section shell resources">
       <div class="section-heading"><div><div class="section-label">11 / RESOURCES</div><h2>Read and download.</h2></div></div>
-      <div class="resource-grid">
-        <article class="resource-card"><span>ARCHITECTURE POV</span><h3>The 8-Hour Identity</h3><p>The complete written architecture point of view.</p><a href="/povs/8-hour-identity/The_8-Hour_Identity_Architecture_POV.md" target="_blank">View full text ↗</a></article>
-        <article class="resource-card"><span>REFERENCE ARCHITECTURE</span><h3>The 8-Hour Identity</h3><p>Detailed access-decision model, logical architecture, authorization pattern and expiry controls.</p><a href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Open PDF ↗</a></article>
+      <div class="resource-grid resource-grid-three">
+        <article class="resource-card">
+          <span>ARCHITECTURE POV</span>
+          <h3>The 8-Hour Identity</h3>
+          <p>The complete written architecture point of view.</p>
+          <a href="/povs/8-hour-identity/The_8-Hour_Identity_Architecture_POV.md" target="_blank">View full text ↗</a>
+        </article>
+
+        <article class="resource-card">
+          <span>DETAILED ARTICLE</span>
+          <h3>Designing Access That Exists Only as Long as the Work Does</h3>
+          <p>The reasoning, trade-offs and implementation implications behind the 8-Hour Identity pattern.</p>
+          <a href="/povs/8-hour-identity/article/">Read the detailed article →</a>
+        </article>
+
+        <article class="resource-card">
+          <span>REFERENCE ARCHITECTURE</span>
+          <h3>The 8-Hour Identity</h3>
+          <p>Detailed access-decision model, logical architecture, authorization pattern and expiry controls.</p>
+          <a href="/povs/8-hour-identity/The_8-Hour_Identity_Reference_Architecture.pdf" target="_blank">Open PDF ↗</a>
+        </article>
       </div>
       <p class="disclaimer">This is an independent architecture Point of View. Product names illustrate possible implementations and do not imply endorsement or representation by any employer or vendor.</p>
     </section>
@@ -192,7 +210,32 @@ Reason: Front-desk coverage
       margin: 16px 0 0;
     }
 
+
+    /* Three resource tiles: POV, detailed article, reference architecture */
+    .resource-grid-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .resource-grid-three .resource-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .resource-grid-three .resource-card p {
+      flex: 1;
+    }
+
+    .resource-grid-three .resource-card a {
+      margin-top: auto;
+    }
+
     @media (max-width: 720px) {
+      .resource-grid-three {
+        grid-template-columns: 1fr;
+      }
+
       .jit-callout {
         margin-top: 24px;
         padding: 24px;
