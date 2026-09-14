@@ -985,3 +985,27 @@ footer {
 
   .connect p { text-align: center; }
 }
+
+/* Publication metadata */
+.pov-publish-date {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.pov-publish-date span {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Three resource cards on wider screens */
+.resources .resource-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 980px) {
+  .resources .resource-grid {
+    grid-template-columns: 1fr;
+  }
+}
