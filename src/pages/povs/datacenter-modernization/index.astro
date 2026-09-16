@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const models = [
+['Virtualization-centric','Predominantly VM-based estates where application transformation is limited.','Familiar operations · lower migration change'],
+['Kubernetes-centric','Containerized and cloud-native applications dominate the future estate.','Platform engineering · application-centric operations'],
+['Unified VM + container','VMs and containers share a platform while modernization proceeds at different speeds.','Move first · modernize selectively'],
+['Mixed estate','Virtualization, Kubernetes, bare metal, cloud and SaaS are placed deliberately.','Optimize placement · accept intentional diversity']
+];
+const assessment=[
+['Workloads','Business criticality, lifecycle, utilization, growth and ownership.'],
+['Applications','Architecture, OS, dependencies, supportability and transformation potential.'],
+['Infrastructure','Compute, storage, network, backup, DR and capacity.'],
+['Operations','Provisioning, patching, monitoring, automation, incidents and lifecycle.'],
+['Economics','Licensing, infrastructure, facilities, support, people and refresh cycles.'],
+['Organisation','Skills, responsibilities, governance and platform-operating readiness.']
+];
+const roadmap=[
+['Understand','Inventory · dependencies · cost baseline · workload classification · skills'],
+['Establish','Platform · network · storage · security · IAM · observability · automation · DR'],
+['Migrate','Pilot · migration factory · waves · validation · cutover · decommission'],
+['Modernize','Containers · refactoring · self-service · GitOps · cloud integration']
+];
+const gates=[
+['Strategy','Do we know why we are modernizing and which outcomes matter?'],
+['Estate','Do we understand workloads, dependencies, utilization and lifecycle?'],
+['Platform','Have we decided where virtualization, Kubernetes and mixed models fit?'],
+['Economics','Have we included current, transition and target-state costs?'],
+['Migration','Can we classify, sequence, test and migrate workloads repeatedly?'],
+['Operations','Can we securely operate the target platform on Day 2?']
+];
+---
+<BaseLayout>
+<header class="site-header"><a class="brand" href="/">SM</a><nav aria-label="Main navigation"><a href="/#work">Work</a><a href="/#povs">POVs</a><a href="/#security">Security</a><a href="/#projects">Projects</a><a href="/#speaking">Speaking</a><a href="/#about">About</a></nav><a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a></header>
+<main id="top">
+<section class="pov-hero shell">
+<div class="eyebrow">OPEN ENTERPRISE MODERNIZATION BLUEPRINT · DATACENTER</div>
+<h1>Open Datacenter <span>Modernization.</span></h1>
+<p class="hero-copy">From virtualization estate to an open, hybrid application platform. A practical decision framework for platform strategy, workload placement, migration, economics, skills and operations.</p>
+<p class="pov-publish-date"><span>Published</span> · <time datetime="2026-09-16">16 September 2026</time></p>
+<div class="hero-actions"><a class="button primary" href="#pov">Explore the blueprint</a><a class="button secondary" href="/povs/datacenter-modernization/Open_Datacenter_Modernization_Executive_Brief.pdf" target="_blank">Executive brief ↗</a></div>
+<div class="tags pov-tags"><span>Virtualization</span><span>Kubernetes</span><span>Hybrid Cloud</span><span>Migration</span><span>TCO</span><span>Operating Model</span></div>
+</section>
+
+<section class="section shell pov-thesis" id="pov"><div class="section-label">THE ARCHITECTURE POSITION</div><blockquote>Don't begin datacenter modernization by choosing a replacement product. Begin by deciding what kind of datacenter your organization needs for the next 5–10 years.</blockquote></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">01 / THE MODERNIZATION QUESTION</div><h2>Are you replacing your hypervisor — or redesigning how the enterprise runs applications?</h2></div><p>A hypervisor exit, hardware refresh, cloud migration, Kubernetes program and datacenter modernization can overlap. They are not the same objective.</p></div>
+<div class="cards three"><article class="card"><span class="card-number">01</span><h3>Migration is not automatically modernization</h3><p>Replacing one hypervisor with another can solve cost or lifecycle pressure while leaving the operating model unchanged.</p></article><article class="card"><span class="card-number">02</span><h3>Kubernetes is not the destination for everything</h3><p>Applications that work well as VMs should not be transformed merely to satisfy a platform preference.</p></article><article class="card"><span class="card-number">03</span><h3>Workloads should drive the target</h3><p>Execution model, placement, economics and operations should determine the future platform.</p></article></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">02 / ASSESS BEFORE YOU ARCHITECT</div><h2>Understand the estate before sizing its replacement.</h2></div><p>Allocated VM capacity is not future demand. Discovery should expose utilization, dependencies, lifecycle, business criticality and constraints.</p></div>
+<div class="cards three">{assessment.map(([t,x],i)=><article class="card"><span class="card-number">{String(i+1).padStart(2,'0')}</span><h3>{t}</h3><p>{x}</p></article>)}</div>
+<div class="decision-example dc-callout"><div class="section-label">WORKLOAD DISPOSITION</div><h3>Retain · Rehost · Replatform · Refactor · Replace · Retire</h3><p>Do not force every workload through the same transformation path.</p></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">03 / THE PIVOTAL PLATFORM DECISION</div><h2>Virtualization, Kubernetes, both — or an intentional mix?</h2></div><p>The useful question is which execution model fits each workload and whether those models should remain separate infrastructure silos.</p></div>
+<div class="dc-platform-grid">{models.map(([t,x,f])=><article class="card dc-platform-card"><h3>{t}</h3><p>{x}</p><small>{f}</small></article>)}</div>
+<div class="decision-example dc-callout"><div class="section-label">UNIFIED PLATFORM VALUE</div><h3>Migration and modernization do not have to happen at the same time.</h3><p>A workload can move as a VM first and be replatformed or refactored later when the business case justifies it.</p></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">04 / WORKLOAD PLACEMENT</div><h2>Modernize by decision, not by destination.</h2></div><p>For each workload, decide disposition, execution model, location and consumption model.</p></div>
+<div class="decision-flow dc-flow"><div><span>DISPOSITION</span><strong>Retain / Rehost / Replatform / Refactor / Replace / Retire</strong></div><b>→</b><div><span>EXECUTION</span><strong>VM / Container / Bare metal / SaaS</strong></div><b>→</b><div><span>PLACEMENT</span><strong>On-prem / Cloud / Edge / Hybrid</strong></div><b>→</b><div><span>CONSUMPTION</span><strong>DIY / Supported / Managed</strong></div></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">05 / PRIVATE, PUBLIC OR HYBRID</div><h2>Cloud is an operating and consumption model — not automatically the cheapest hosting location.</h2></div><p>Evaluate demand variability, latency, data gravity, sovereignty, licensing, connectivity, egress, resilience, existing investment and skills.</p></div>
+<div class="cards three"><article class="card"><h3>Private / on-prem</h3><p>Can suit predictable, persistent, regulated, data-heavy or latency-sensitive workloads where ownership is justified.</p></article><article class="card"><h3>Public cloud</h3><p>Can suit elastic, temporary or cloud-integrated workloads where consumption and managed capabilities outweigh infrastructure ownership.</p></article><article class="card"><h3>Hybrid</h3><p>A deliberate placement strategy when different workload characteristics justify different locations.</p></article></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">06 / BUILD, BUY OR CONSUME</div><h2>Decide what you want to own operationally.</h2></div><p>Choose where control creates value and where operating responsibility should be transferred.</p></div>
+<div class="cards three"><article class="card"><span class="status">BUILD / DIY</span><h3>Own the platform</h3><p>Maximum control and customization, with the greatest integration, lifecycle and skills responsibility.</p></article><article class="card featured-choice"><span class="status">SUPPORTED</span><h3>Buy the capability</h3><p>Retain platform control while gaining an enterprise support and lifecycle model.</p></article><article class="card"><span class="status">MANAGED</span><h3>Consume the outcome</h3><p>Reduce platform operations in exchange for provider dependency and consumption-model considerations.</p></article></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">07 / TARGET PLATFORM</div><h2>The architecture emerges from the decisions.</h2></div><p>Keep the logical architecture vendor-neutral first. Technology mapping follows platform intent and capability requirements.</p></div>
+<div class="architecture-stack"><div>Application estate <small>Legacy · enterprise · cloud-native · data · AI · SaaS</small></div><span>↓</span><div class="accent-box">Application platform <small>Virtual machines · containers · Kubernetes workloads · platform services</small></div><span>↓</span><div>Platform capabilities <small>IAM · security · observability · automation · GitOps · networking · registry · backup · DR</small></div><span>↓</span><div>Infrastructure <small>Compute · network · storage / SDS · accelerators</small></div><span>↓</span><div class="accent-box">Placement <small>On-prem · edge · public cloud</small></div></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">08 / MIGRATION FACTORY</div><h2>Treat migration as a repeatable capability, not thousands of individual projects.</h2></div><p>Classify complexity, create waves, validate repeatedly and make decommissioning part of done.</p></div>
+<div class="runtime-flow dc-runtime">{['Discover','Assess','Classify','Dependencies','Wave plan','Migrate','Validate','Cut over','Decommission'].map((t,i)=><div><span>{i+1}</span><strong>{t}</strong></div>)}</div>
+<div class="decision-example dc-callout"><div class="section-label">EFFORT IS NOT VM COUNT × MIGRATION TIME</div><h3>Discovery + remediation + platform build + testing + wave throughput + business windows + dependency sequencing + validation.</h3></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">09 / ECONOMICS</div><h2>Make the business case include the transition.</h2></div><p>Compare current-state cost, target-state cost and the temporary cost of running both worlds during migration.</p></div>
+<div class="dc-economics"><article class="card"><span class="card-number">CURRENT</span><h3>Current state</h3><p>Virtualization · hardware · storage · network · backup · DR · facilities · tools · operations · people.</p></article><div class="dc-plus">+</div><article class="card"><span class="card-number">TRANSITION</span><h3>Migration</h3><p>New platform · remediation · migration program · training · parallel run · temporary duplication.</p></article><div class="dc-plus">→</div><article class="card"><span class="card-number">TARGET</span><h3>Target state</h3><p>Infrastructure · subscriptions · cloud consumption · operations · support · people · lifecycle.</p></article></div>
+<div class="decision-example dc-callout"><div class="section-label">TCO PRINCIPLE</div><h3>Do not claim target-state savings while hiding the period in which the old platform, new platform and migration program coexist.</h3></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">10 / PEOPLE & DAY 2</div><h2>A platform is not modern because installation was automated.</h2></div><p>Skills and operations must evolve with the technology. Existing infrastructure expertise remains valuable as interfaces move toward APIs, automation, policy and platform engineering.</p></div>
+<div class="tech-table"><div class="tech-row"><strong>Provisioning</strong><span>Manual requests → automation, APIs and self-service.</span></div><div class="tech-row"><strong>Operations</strong><span>Console-centric administration → declarative automation and GitOps where appropriate.</span></div><div class="tech-row"><strong>Reliability</strong><span>Reactive monitoring → observability, SRE practices and tested recovery.</span></div><div class="tech-row"><strong>Security</strong><span>Periodic checks → policy automation, identity controls and continuous evidence.</span></div><div class="tech-row"><strong>Lifecycle</strong><span>One-time build → upgrades, capacity, backup, DR, certificates and cost management.</span></div></div>
+<div class="decision-example dc-callout"><div class="section-label">DAY-2 TEST</div><h3>Can the organisation operate the target architecture securely at 2 AM during an outage?</h3></div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">11 / TRANSFORMATION ROADMAP</div><h2>Move in stages. Modernize selectively.</h2></div></div>
+<div class="roadmap dc-roadmap">{roadmap.map(([t,x],i)=><div><span>{String(i+1).padStart(2,'0')}</span><strong>{t}</strong><small>{x}</small></div>)}</div></section>
+
+<section class="section shell"><div class="section-heading"><div><div class="section-label">12 / EXECUTIVE DECISION GATES</div><h2>Before scaling migration, six questions should have credible answers.</h2></div></div>
+<div class="cards three">{gates.map(([t,x],i)=><article class="card"><span class="card-number">{String(i+1).padStart(2,'0')}</span><h3>{t}</h3><p>{x}</p></article>)}</div></section>
+
+<section class="section shell resources"><div class="section-heading"><div><div class="section-label">13 / RESOURCES</div><h2>Read, model and decide.</h2></div><p>Use the POV for the reasoning, the executive brief for leadership discussions and the workbook for architecture workshops.</p></div>
+<div class="resource-grid dc-resource-grid">
+<article class="resource-card"><span>ARCHITECTURE POV · PDF</span><h3>Open Datacenter Modernization</h3><p>The complete architecture and decision framework in a downloadable PDF.</p><a href="/povs/datacenter-modernization/Open_Datacenter_Modernization_POV.pdf" target="_blank">Open PDF ↗</a></article>
+<article class="resource-card"><span>EXECUTIVE BRIEF · PDF</span><h3>Two-page CXO brief</h3><p>A visual summary of platform choice, economics, roadmap and executive decision gates.</p><a href="/povs/datacenter-modernization/Open_Datacenter_Modernization_Executive_Brief.pdf" target="_blank">Open PDF ↗</a></article>
+<article class="resource-card"><span>DECISION TOOLKIT · XLSX</span><h3>Architecture workshop toolkit</h3><p>Platform, placement, migration complexity, build/buy/consume, TCO and readiness worksheets.</p><a href="/povs/datacenter-modernization/Datacenter_Modernization_Decision_Toolkit.xlsx">Download toolkit ↓</a></article>
+</div><p class="disclaimer">This is an independent architecture Point of View. Product names, where referenced in supporting material, illustrate possible implementations and do not imply endorsement or representation by any employer or vendor.</p></section>
+</main>
+<footer class="shell"><span>© {new Date().getFullYear()} Sumit Mukherjee</span><span>Open Enterprise Modernization Blueprint · Published 16 September 2026</span></footer>
+
+<style>
+.dc-callout{width:100%;margin-top:32px;padding:32px;border-radius:12px}.dc-callout>.section-label{margin:0}.dc-callout>h3{margin:16px 0 0;line-height:1.25}.dc-callout>p{margin:16px 0 0}
+.dc-platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.dc-platform-card{height:100%;display:flex;flex-direction:column}.dc-platform-card small{display:block;margin-top:auto;padding-top:20px;color:var(--accent);line-height:1.5}
+.dc-flow{grid-template-columns:1fr auto 1fr auto 1fr auto 1fr}.dc-runtime{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dc-economics{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:16px;align-items:stretch}.dc-economics .card{height:100%}.dc-plus{align-self:center;color:var(--accent);font-size:28px;font-weight:700}
+.dc-roadmap{grid-template-columns:repeat(4,minmax(0,1fr))}.dc-roadmap>div{height:100%}.dc-roadmap small{line-height:1.55}
+.dc-resource-grid{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}.dc-resource-grid .resource-card{height:100%;display:flex;flex-direction:column}.dc-resource-grid .resource-card p{flex:1}.dc-resource-grid .resource-card a{margin-top:auto}
+@media(max-width:900px){.dc-flow{grid-template-columns:1fr}.dc-flow b{transform:rotate(90deg);justify-self:center}.dc-economics{grid-template-columns:1fr}.dc-plus{justify-self:center;transform:rotate(90deg)}.dc-roadmap{grid-template-columns:repeat(2,minmax(0,1fr))}.dc-resource-grid{grid-template-columns:1fr}}
+@media(max-width:720px){.dc-callout{margin-top:24px;padding:24px}.dc-platform-grid,.dc-roadmap,.dc-runtime{grid-template-columns:1fr}}
+
+/* Consistent interactive treatment for tiles on this POV */
+.card,
+.resource-card,
+.decision-example,
+.architecture-stack > div,
+.runtime-flow > div,
+.roadmap > div,
+.decision-flow > div,
+.tech-row {
+  transition:
+    background-color .18s ease,
+    border-color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.card:hover,
+.resource-card:hover,
+.decision-example:hover,
+.architecture-stack > div:hover,
+.runtime-flow > div:hover,
+.roadmap > div:hover,
+.decision-flow > div:hover,
+.tech-row:hover {
+  background: #1d2a35;
+  border-color: #465866;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+}
+
+.resource-card:hover a {
+  color: var(--accent-2);
+}
+
+</style>
+</BaseLayout>
