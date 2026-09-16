@@ -57,11 +57,14 @@ const projects = [
 
 const povs = [
   {
-    number: '01',
-    title: 'Open Datacenter Modernization',
-    text: 'A practical decision framework for infrastructure modernization covering workload assessment, private vs public cloud, migration approaches, TCO, skills, operating model, open-source options and enterprise-supported implementations.',
-    tags: ['Datacenter', 'Virtualization', 'Hybrid Cloud', 'Migration']
-  },
+  number: '01',
+  title: 'Open Datacenter Modernization',
+  text: 'A practical decision framework for infrastructure modernization covering workload assessment, private vs public cloud, migration approaches, TCO, skills, operating model, open-source options and enterprise-supported implementations.',
+  tags: ['Datacenter', 'Virtualization', 'Hybrid Cloud', 'Migration'],
+  status: 'published',
+  published: 'SEPTEMBER 2026',
+  href: '/povs/datacenter-modernization/'
+},
   {
     number: '02',
     title: 'Open Data Platform Modernization',
@@ -282,18 +285,40 @@ const speaking = [
       </div>
 
       <div class="pov-grid">
-        {povs.map((pov) => (
-          <article class="pov-card">
-            <div class="pov-number">{pov.number}</div>
-            <h3>{pov.title}</h3>
-            <p>{pov.text}</p>
-            <div class="tags">
-              {pov.tags.map((tag) => <span>{tag}</span>)}
-            </div>
-            <div class="pov-status">POV · COMING SOON</div>
-          </article>
-        ))}
+  {povs.map((pov) => (
+    <article class={`pov-card ${pov.status === 'published' ? 'published-pov' : ''}`}>
+      <div class="pov-number">{pov.number}</div>
+
+      <h3>{pov.title}</h3>
+
+      <p>{pov.text}</p>
+
+      <div class="tags">
+        {pov.tags.map((tag) => <span>{tag}</span>)}
       </div>
+
+      {pov.status === 'published' ? (
+        <>
+          <div class="pov-status published">
+            PUBLISHED · {pov.published}
+          </div>
+
+          <a
+            class="pov-card-link"
+            href={pov.href}
+            aria-label={`Explore ${pov.title}`}
+          >
+            Explore the blueprint →
+          </a>
+        </>
+      ) : (
+        <div class="pov-status">
+          POV · COMING SOON
+        </div>
+      )}
+    </article>
+  ))}
+</div>
     </section>
 
     <section class="section shell" id="projects">
