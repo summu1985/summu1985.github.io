@@ -1,0 +1,587 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const sourceLinks = [
+  {
+    label: 'Anthropic — Detecting and countering misuse of AI: September 2026',
+    href: 'https://www.anthropic.com/threat-intelligence-report-september-2026'
+  },
+  {
+    label: 'NIST — NVD operations updated for record CVE growth',
+    href: 'https://www.nist.gov/news-events/news/2026/04/nist-updates-nvd-operations-address-record-cve-growth'
+  },
+  {
+    label: 'NIST — Development of an AI agent enrichment workflow at the NVD',
+    href: 'https://www.nist.gov/news-events/events/2026/09/itl-ai-webinar-development-ai-agent-enrichment-workflow-national'
+  },
+  {
+    label: 'NIST IR 8587 — Protecting Tokens and Assertions from Forgery, Theft, and Misuse',
+    href: 'https://csrc.nist.gov/pubs/ir/8587/final'
+  },
+  {
+    label: 'FIRST — Exploit Prediction Scoring System (EPSS)',
+    href: 'https://www.first.org/epss/'
+  },
+  {
+    label: 'CISA — Known Exploited Vulnerabilities Catalog',
+    href: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog'
+  },
+  {
+    label: 'OpenSSF — Machine-readable signals for CRA due diligence',
+    href: 'https://openssf.org/blog/2026/05/29/aligning-on-machine-readable-signals-as-the-foundation-for-due-diligence/'
+  },
+  {
+    label: 'Microsoft Security — ASCII smuggling crosses over from AI prompt injection to phishing evasion',
+    href: 'https://www.microsoft.com/en-us/security/blog/2026/09/03/ascii-smuggling-crosses-over-from-ai-prompt-injection-to-phishing-evasion/'
+  }
+];
+---
+
+<BaseLayout>
+  <header class="site-header">
+    <a class="brand" href="/">SM</a>
+    <nav aria-label="Main navigation">
+      <a href="/#povs">POVs</a>
+      <a href="/#security">Security</a>
+      <a href="/#speaking">Speaking</a>
+      <a href="/#about">About</a>
+    </nav>
+    <a class="header-cta" href="mailto:sumit.mckv@gmail.com">Connect</a>
+  </header>
+
+  <main id="top">
+    <section class="pov-hero shell research-hero">
+      <div class="eyebrow">RESEARCH & ANALYSIS · SECURITY ARCHITECTURE · AI</div>
+      <h1>Cybersecurity is becoming a <span>decision-latency problem.</span></h1>
+      <p class="hero-copy">
+        Why machine-scale security requires better correlation, delegated authority and safer automation—not simply more detection.
+      </p>
+
+      <p class="pov-publish-date">
+        <span>Published</span> · <time datetime="2026-09-18">18 September 2026</time>
+      </p>
+
+      <div class="tags pov-tags">
+        <span>Security Architecture</span>
+        <span>AI</span>
+        <span>Vulnerability Management</span>
+        <span>Software Supply Chain</span>
+        <span>Identity</span>
+      </div>
+    </section>
+
+    <section class="section shell article-shell">
+      <div class="article-copy">
+        <p class="article-lede">
+          For years, much of cybersecurity has been built around a simple assumption: if we can detect more threats and vulnerabilities, we can become more secure.
+        </p>
+
+        <p>
+          We invested accordingly—more vulnerability scanners, more application security testing, more threat intelligence, more endpoint telemetry, more cloud security signals, more SBOMs and more CVEs. AI is now accelerating this process further.
+        </p>
+
+        <p>
+          But recent developments suggest that a different constraint is emerging. What if finding security problems is no longer the hardest part? What if the harder problem becomes deciding—quickly and defensibly—which problems actually matter, what action should be taken, and how much of that action we are prepared to automate?
+        </p>
+
+        <div class="research-thesis">
+          <div class="section-label">THE THESIS</div>
+          <h2>Cybersecurity is gradually moving from primarily a detection problem toward a decision-latency problem.</h2>
+          <p>AI is accelerating that transition on both sides.</p>
+        </div>
+
+        <h2>Attackers are starting to remove human latency</h2>
+
+        <p>
+          The most interesting part of recent research into malicious AI use is not that attackers can ask an AI system how to attack something. That has been possible for some time. What is changing is the role AI can play inside the operational workflow.
+        </p>
+
+        <p>
+          Anthropic's September 2026 threat-intelligence report describes cyber operations in which AI moved beyond conversational assistance into direct execution and orchestration. It reports multi-agent frameworks conducting reconnaissance, exploitation and data collection against multiple targets in parallel. Humans remained involved in important decisions such as target selection and review, so describing these operations as universally autonomous would overstate the evidence.
+        </p>
+
+        <p>
+          The important shift is economic. Tasks that traditionally consumed scarce human expertise—reconnaissance, analysis, tool development, exploitation and processing collected information—can increasingly be delegated to machines operating simultaneously. Anthropic reports breaches completed in roughly two to three hours in some cases and individual operators handling multiple victims in parallel.
+        </p>
+
+        <blockquote>
+          The innovation is not necessarily a new attack technique. It is the changing economics of performing familiar attacks at speed and scale.
+        </blockquote>
+
+        <p>
+          That changes the defensive question. It is no longer only: <em>Can AI invent a new attack?</em> A potentially more important question is: <strong>What happens when existing attacks become cheaper and faster to execute at scale?</strong>
+        </p>
+
+        <h2>Defenders are facing their own scaling problem</h2>
+
+        <p>
+          Vulnerability management makes the same constraint visible from the defensive side. In April 2026, NIST reported that CVE submissions had increased 263% between 2020 and 2025, with submissions in the first quarter of 2026 nearly one-third higher than the same period a year earlier.
+        </p>
+
+        <p>
+          NIST responded by changing how the National Vulnerability Database prioritizes enrichment. Rather than immediately enriching every CVE, the NVD now prioritizes signals such as inclusion in CISA's Known Exploited Vulnerabilities catalog, use in the U.S. federal government and critical-software designation.
+        </p>
+
+        <p>
+          Then, on September 17, NIST presented work on an AI-agent enrichment workflow for the NVD. NIST explicitly describes the increasing scale and complexity of discovered vulnerabilities as a challenge to producing timely, actionable information, while also noting that AI-assisted vulnerability discovery and exploitation can increase the pressure further.
+        </p>
+
+        <div class="research-callout">
+          <strong>The symmetry matters.</strong>
+          <p>Attackers are exploring AI to scale cyber operations. Defenders are exploring AI to scale vulnerability analysis. Both are responding to the same underlying constraint: human attention does not scale at machine speed.</p>
+        </div>
+
+        <h2>Finding more vulnerabilities does not automatically make us safer</h2>
+
+        <p>
+          Imagine an organization currently discovers 1,000 vulnerabilities every month. Now AI-assisted security testing improves dramatically and discovers 10,000. Has the organization become ten times more secure? No. It has become better informed.
+        </p>
+
+        <p>
+          Whether it becomes more secure depends on what happens next. Someone—or increasingly something—still needs to determine whether the vulnerable component is present, whether exploitation is occurring, whether the code is reachable, whether the workload is exposed, what privileges could be gained, how important the application is, what the likely business impact is, and whether a safe remediation exists.
+        </p>
+
+        <p>
+          This is why vulnerability management is evolving from <strong>vulnerability enumeration toward contextual risk reasoning</strong>.
+        </p>
+
+        <div class="signal-grid" aria-label="Vulnerability prioritization signals">
+          <div><strong>CVSS</strong><span>Technical severity</span></div>
+          <div><strong>EPSS</strong><span>Likelihood of exploitation activity</span></div>
+          <div><strong>CISA KEV</strong><span>Evidence of exploitation in the wild</span></div>
+          <div><strong>VEX</strong><span>Whether a vulnerability affects a product</span></div>
+          <div><strong>SBOM</strong><span>Component and dependency inventory</span></div>
+          <div><strong>Runtime context</strong><span>Exposure, reachability and environment</span></div>
+          <div><strong>Asset context</strong><span>Business criticality and impact</span></div>
+        </div>
+
+        <p>
+          None of those signals independently answers the question enterprises actually care about: <strong>What should I fix first?</strong> The answer increasingly comes from correlation.
+        </p>
+
+        <h2>The opportunity for AI may be reasoning, not just detection</h2>
+
+        <p>
+          Imagine a security system receiving vulnerability information, exploit intelligence, software inventory, VEX, runtime exposure, application criticality and threat intelligence. Instead of producing another alert, it constructs an evidence chain.
+        </p>
+
+        <div class="evidence-chain">
+          <div>Severe vulnerability</div><span>→</span>
+          <div>Observed exploitation</div><span>→</span>
+          <div>Component present</div><span>→</span>
+          <div>Code reachable</div><span>→</span>
+          <div>Internet exposed</div><span>→</span>
+          <div>Critical application</div><span>→</span>
+          <div>Tested remediation</div>
+        </div>
+
+        <p>
+          That is a fundamentally different role for AI. It becomes less of an <strong>alert generator</strong> and more of a <strong>security reasoning layer</strong>—helping teams assemble evidence, test assumptions and reach a defensible conclusion more quickly.
+        </p>
+
+        <p>But once the system reaches a conclusion, another question appears: should it be allowed to act?</p>
+
+        <h2>Machine-speed defense cannot mean uncontrolled automation</h2>
+
+        <p>
+          It is tempting to conclude that machine-speed attacks require completely autonomous machine-speed defense. That does not follow. Some security actions are relatively reversible. Others can create consequences worse than the vulnerability itself.
+        </p>
+
+        <p>
+          The architectural question therefore is not <strong>human or AI?</strong> It is: <strong>Which decisions can safely be delegated, under what evidence threshold, with what guardrails and with what rollback mechanism?</strong>
+        </p>
+
+        <div class="decision-example research-decision">
+          <div class="section-label">AUTOMATION PRINCIPLE</div>
+          <h3>The objective should be minimum safe decision latency.</h3>
+          <p>Automate high-confidence, lower-consequence actions. For higher-consequence decisions, let machines assemble the evidence and recommendation while humans retain authorization.</p>
+        </div>
+
+        <h2>Authority becomes part of the security architecture</h2>
+
+        <p>
+          Once software can act, it needs authority. That makes identity and delegated access part of the same architecture problem.
+        </p>
+
+        <p>
+          NIST finalized IR 8587 in September 2026, providing guidance on protecting identity tokens, access tokens and assertions from forgery, theft and misuse. The report is written primarily for U.S. federal agencies and cloud service providers, but the architectural implication is broader: software that acts on behalf of people or systems needs bounded, verifiable authority.
+        </p>
+
+        <div class="authority-grid">
+          <div><span>01</span><strong>Who is acting?</strong></div>
+          <div><span>02</span><strong>On whose behalf?</strong></div>
+          <div><span>03</span><strong>What authority is delegated?</strong></div>
+          <div><span>04</span><strong>For how long?</strong></div>
+          <div><span>05</span><strong>Against which resources?</strong></div>
+          <div><span>06</span><strong>Can it be revoked and attributed?</strong></div>
+        </div>
+
+        <blockquote>Autonomous software should receive constrained authority, not inherited trust.</blockquote>
+
+        <p>
+          That principle applies to AI agents, workloads and software-delivery pipelines alike.
+        </p>
+
+        <h2>Software supply-chain security is moving in the same direction</h2>
+
+        <p>
+          For several years, much of the software supply-chain conversation centered on producing evidence: generate an SBOM, sign an artifact, produce provenance, publish a VEX statement. Those are important capabilities—but evidence that is generated and then ignored does not change a security outcome.
+        </p>
+
+        <p>
+          The real value appears when evidence influences a decision. Should this dependency enter the organization? Was the artifact produced by the expected build system? Was the source repository expected? Has the artifact changed? Does a reported vulnerability actually affect this product? Should this workload be permitted into production?
+        </p>
+
+        <p>
+          OpenSSF's 2026 work on machine-readable signals for Cyber Resilience Act due diligence points in the same direction, connecting SBOMs, SLSA provenance, Sigstore, vulnerability information and VEX-style data to operational decision-making at scale.
+        </p>
+
+        <blockquote>Software supply-chain security is evolving from generating evidence toward operating on evidence.</blockquote>
+
+        <h2>Security boundaries are converging</h2>
+
+        <p>
+          Microsoft recently documented a high-volume phishing campaign using invisible Unicode tag characters associated with a technique widely discussed in AI prompt-injection research. In this campaign, the characters were used to split words inside phishing messages in ways that could interfere with some detection approaches while remaining visually readable to people.
+        </p>
+
+        <p>
+          The specific technique is less important here than the crossover. AI systems write software, ingest email, call APIs, operate infrastructure, analyze vulnerabilities, interact with identities and consume software dependencies. It will become increasingly difficult to treat “AI security” as a separate island from application, identity, infrastructure and software supply-chain security.
+        </p>
+
+        <h2>A different way to think about the security stack</h2>
+
+        <p>Putting these developments together suggests a model I find increasingly useful:</p>
+
+        <div class="architecture-model">
+          <div><span>01</span><strong>Evidence</strong><small>CVEs · SBOMs · VEX · provenance · signatures · telemetry · exploit observations</small></div>
+          <b>→</b>
+          <div><span>02</span><strong>Context</strong><small>Criticality · exposure · reachability · identity · environment · business impact</small></div>
+          <b>→</b>
+          <div><span>03</span><strong>Decision</strong><small>What actually matters now?</small></div>
+          <b>→</b>
+          <div><span>04</span><strong>Authority</strong><small>Who—or what—is permitted to act?</small></div>
+          <b>→</b>
+          <div><span>05</span><strong>Action</strong><small>Patch · isolate · block · rotate · investigate · approve · accept</small></div>
+          <b>→</b>
+          <div><span>06</span><strong>Feedback</strong><small>Did the action work, and did risk actually decrease?</small></div>
+        </div>
+
+        <p>
+          AI can potentially accelerate several stages. But the security architecture still has to establish trust between them.
+        </p>
+
+        <h2>What this means for security architecture</h2>
+
+        <div class="principle-list">
+          <div><span>01</span><p><strong>Correlate before prioritizing.</strong> Technical severity is only one input. Combine exploitation, reachability, exposure, asset criticality and business impact.</p></div>
+          <div><span>02</span><p><strong>Separate evidence from decision.</strong> Keep the evidence chain inspectable so teams can understand why a recommendation was made.</p></div>
+          <div><span>03</span><p><strong>Define automation by consequence.</strong> High confidence is not enough by itself; reversibility and blast radius matter.</p></div>
+          <div><span>04</span><p><strong>Constrain machine authority.</strong> Use short-lived, scoped, attributable credentials rather than broad inherited trust.</p></div>
+          <div><span>05</span><p><strong>Close the loop.</strong> A security action is not complete until the system can determine whether risk actually decreased and whether the environment behaved as expected.</p></div>
+        </div>
+
+        <h2>My takeaway</h2>
+
+        <p>
+          I do not think the most important cybersecurity story about AI is that AI will replace security analysts. Nor is it simply that attackers now have AI.
+        </p>
+
+        <p>
+          The deeper change may be that both the production of security information and the execution of cyber activity are moving toward machine scale. Humans remain important precisely because some decisions carry consequences that cannot safely be delegated. But keeping humans responsible for every correlation, every prioritization decision and every routine response will increasingly create a latency disadvantage.
+        </p>
+
+        <p>
+          The challenge is therefore not to remove humans from cybersecurity. It is to redesign security systems so that human judgment is concentrated where it creates the most value.
+        </p>
+
+        <div class="research-thesis closing-thesis">
+          <div class="section-label">THE ARCHITECTURE QUESTION</div>
+          <h2>The future of cybersecurity may not be determined by who detects the most threats. It may be determined by who can convert trustworthy evidence into safe action with the least decision latency.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell research-sources">
+      <div class="section-heading">
+        <div>
+          <div class="section-label">SOURCES & FURTHER READING</div>
+          <h2>Evidence behind the argument.</h2>
+        </div>
+        <p>Primary and practitioner sources referenced in this analysis.</p>
+      </div>
+
+      <div class="source-list">
+        {sourceLinks.map((source, i) => (
+          <a href={source.href} target="_blank" rel="noopener noreferrer">
+            <span>{String(i + 1).padStart(2, '0')}</span>
+            <strong>{source.label}</strong>
+            <b>↗</b>
+          </a>
+        ))}
+      </div>
+
+      <p class="disclaimer">
+        This article is an independent professional analysis. References are included to distinguish source observations from my interpretation and architecture conclusions.
+      </p>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>© {new Date().getFullYear()} Sumit Mukherjee</span>
+    <span>Research & Analysis · Published 18 September 2026</span>
+  </footer>
+
+  <style>
+    .research-hero .hero-copy { max-width: 880px; }
+
+    .article-shell {
+      display: block;
+    }
+
+    .article-copy {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 19px;
+      line-height: 1.72;
+      color: #c7d0d8;
+    }
+
+    .article-copy p {
+      margin: 0 0 24px;
+    }
+
+    .article-copy .article-lede {
+      color: var(--text);
+      font-size: 24px;
+      line-height: 1.55;
+    }
+
+    .article-copy h2 {
+      margin: 72px 0 24px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.13;
+      color: var(--text);
+    }
+
+    .article-copy blockquote {
+      margin: 40px 0;
+      padding: 24px 28px;
+      border-left: 3px solid var(--accent);
+      background: #18232d;
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+
+    .research-thesis {
+      margin: 56px 0;
+      padding: 36px;
+      border: 1px solid rgba(139, 224, 192, .5);
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(139,224,192,.09), rgba(139,224,192,.02)),
+        #18232d;
+    }
+
+    .research-thesis h2 {
+      margin: 16px 0;
+      font-size: clamp(30px, 4vw, 44px);
+    }
+
+    .research-thesis p { margin: 0; }
+
+    .research-callout,
+    .research-decision {
+      margin: 40px 0;
+      padding: 28px;
+      border: 1px solid #34424e;
+      border-radius: 14px;
+      background: #18232d;
+    }
+
+    .research-callout strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 22px;
+    }
+
+    .research-callout p,
+    .research-decision p { margin: 0; }
+
+    .research-decision h3 {
+      margin: 16px 0;
+      color: var(--text);
+      font-size: 28px;
+      line-height: 1.25;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 32px 0 40px;
+    }
+
+    .signal-grid div {
+      padding: 18px 20px;
+      border: 1px solid #34424e;
+      border-radius: 10px;
+      background: #18232d;
+    }
+
+    .signal-grid strong,
+    .signal-grid span { display: block; }
+
+    .signal-grid strong { color: var(--accent); }
+    .signal-grid span { margin-top: 4px; color: var(--muted); font-size: 15px; }
+
+    .evidence-chain {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 32px 0 40px;
+    }
+
+    .evidence-chain div {
+      padding: 12px 14px;
+      border: 1px solid #34424e;
+      border-radius: 9px;
+      background: #18232d;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .evidence-chain span { color: var(--accent); }
+
+    .authority-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 32px 0 40px;
+    }
+
+    .authority-grid div {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 18px 20px;
+      border: 1px solid #34424e;
+      border-radius: 10px;
+      background: #18232d;
+    }
+
+    .authority-grid span {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .architecture-model {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 32px 0 40px;
+    }
+
+    .architecture-model > div {
+      padding: 22px;
+      border: 1px solid #34424e;
+      border-radius: 12px;
+      background: #18232d;
+    }
+
+    .architecture-model > div span,
+    .architecture-model > div strong,
+    .architecture-model > div small { display: block; }
+
+    .architecture-model > div span {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .architecture-model > div strong {
+      margin-top: 8px;
+      color: var(--text);
+      font-size: 22px;
+    }
+
+    .architecture-model > div small {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .architecture-model > b {
+      justify-self: center;
+      color: var(--accent);
+      font-size: 22px;
+    }
+
+    .principle-list {
+      display: grid;
+      gap: 12px;
+      margin: 32px 0 40px;
+    }
+
+    .principle-list > div {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 20px;
+      border: 1px solid #34424e;
+      border-radius: 10px;
+      background: #18232d;
+    }
+
+    .principle-list span {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .principle-list p { margin: 0; }
+
+    .closing-thesis { margin-bottom: 0; }
+
+    .research-sources .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .source-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .source-list a {
+      display: grid;
+      grid-template-columns: 50px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .source-list a:hover strong { color: var(--accent); }
+    .source-list span { color: #657684; font-size: 12px; }
+    .source-list strong { font-size: 16px; line-height: 1.4; }
+    .source-list b { color: var(--accent); font-size: 18px; }
+
+    @media (max-width: 720px) {
+      .article-copy { font-size: 17px; }
+      .article-copy .article-lede { font-size: 21px; }
+      .article-copy h2 { margin-top: 56px; }
+      .signal-grid,
+      .authority-grid { grid-template-columns: 1fr; }
+      .research-thesis { padding: 24px; }
+      .source-list a { grid-template-columns: 34px 1fr auto; gap: 10px; }
+    }
+  </style>
+</BaseLayout>
