@@ -161,7 +161,13 @@ const speaking = [
       </div>
 
       <div style="display: grid; gap: 24px;">
-        <article class="featured-pov-card">
+        <a
+          class="featured-pov-card featured-pov-link"
+          href="/povs/consent-management/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open From Consent Capture to Enforceable Compliance in a new tab"
+        >
           <div>
             <div class="pov-status published">PUBLISHED · SEPTEMBER 2026</div>
             <div class="featured-pov-kicker">INDIA · BANKING · PRIVACY</div>
@@ -178,10 +184,16 @@ const speaking = [
               <span>Events</span>
             </div>
           </div>
-          <a class="button secondary" href="/povs/consent-management/">Explore the POV →</a>
-        </article>
+          <span class="button secondary">Explore the POV ↗</span>
+        </a>
 
-        <article class="featured-pov-card">
+        <a
+          class="featured-pov-card featured-pov-link"
+          href="/povs/8-hour-identity/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open The 8-Hour Identity in a new tab"
+        >
           <div>
             <div class="pov-status published">PUBLISHED · SEPTEMBER 2026</div>
             <div class="featured-pov-kicker">IDENTITY SECURITY · ZERO TRUST · JIT ACCESS</div>
@@ -198,8 +210,8 @@ const speaking = [
               <span>RBAC / ABAC</span>
             </div>
           </div>
-          <a class="button secondary" href="/povs/8-hour-identity/">Explore the POV →</a>
-        </article>
+          <span class="button secondary">Explore the POV ↗</span>
+        </a>
       </div>
 
       <div class="blueprint-heading">
@@ -377,5 +389,38 @@ const speaking = [
       transform: translateY(-3px);
       border-color: rgba(139, 224, 192, .7);
     }
+  
+    /* Featured architecture POV tiles: whole-card interaction */
+    .featured-pov-link {
+      cursor: pointer;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .featured-pov-link:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent) !important;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139, 224, 192, .22),
+          rgba(139, 224, 192, .07)
+        ),
+        var(--panel-2) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .08);
+    }
+
+    .featured-pov-link:focus-visible {
+      outline: 3px solid rgba(0, 122, 94, .22);
+      outline-offset: 4px;
+    }
+
+    .featured-pov-link .button.secondary {
+      pointer-events: none;
+    }
+
   </style>
 </BaseLayout>

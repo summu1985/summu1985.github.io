@@ -1009,3 +1009,448 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================================
+   LIGHT EDITORIAL THEME
+   Sumit Mukherjee portfolio
+   Append this block after the existing global.css rules.
+   ========================================================= */
+
+:root {
+  --bg: #f2f2f2;
+  --panel: #ffffff;
+  --panel-2: #f8f8f8;
+  --text: #151515;
+  --muted: #4d4d4d;
+  --line: #d2d2d2;
+  --accent: #b50000;
+  --accent-2: #7a0000;
+  --accent-strong: #ee0000;
+}
+
+body {
+  color: var(--text);
+  background:
+    radial-gradient(circle at 70% 10%, rgba(238, 0, 0, .045), transparent 28rem),
+    var(--bg);
+}
+
+/* Header and navigation */
+.brand {
+  border-color: #b8b8b8;
+  color: var(--accent);
+  background: #ffffff;
+}
+
+nav a,
+.header-cta {
+  color: #4d4d4d;
+}
+
+nav a:hover,
+.header-cta:hover {
+  color: #151515;
+}
+
+/* Hero and editorial copy */
+.hero h1 span,
+.pov-hero h1 span,
+.featured-pov-kicker {
+  color: #5f5f5f;
+}
+
+.hero-copy,
+.large-copy,
+.thought p {
+  color: var(--muted);
+}
+
+.hero-proof span,
+.section-heading > p,
+.card p,
+.project-card p,
+.work-item p,
+.pov-card p,
+.featured-pov-card p,
+.pov-principles span,
+.tech-row span,
+.discovery-grid p,
+.resource-card p,
+.disclaimer,
+.connect p {
+  color: var(--muted);
+}
+
+.card-number,
+.pov-number,
+.speaking-item span,
+footer,
+.source-list span {
+  color: #6a6e73 !important;
+}
+
+/* Buttons and links */
+.button.primary {
+  background: var(--accent-strong);
+  color: #ffffff;
+  border-color: var(--accent-strong);
+}
+
+.button.primary:hover {
+  background: #c9190b;
+  border-color: #c9190b;
+}
+
+.button.secondary {
+  background: #ffffff;
+  border-color: #b8b8b8;
+  color: #151515;
+}
+
+.button.secondary:hover {
+  background: #f8f8f8;
+  border-color: #6a6e73;
+}
+
+.text-link,
+.project-card a,
+.resource-card a,
+.pov-card-link,
+.article-back {
+  color: var(--accent);
+}
+
+/* Tags and status pills */
+.tags span {
+  color: #4d4d4d;
+  border-color: #c7c7c7;
+  background: rgba(255, 255, 255, .72);
+}
+
+.pov-status,
+.coming-soon,
+.project-card .status {
+  color: var(--accent);
+  border-color: #c7c7c7;
+  background: rgba(255, 255, 255, .65);
+}
+
+.pov-status.published {
+  background: rgba(238, 0, 0, .045);
+  border-color: rgba(181, 0, 0, .28);
+}
+
+/* Core card surfaces */
+.card,
+.project-card,
+.pov-card,
+.pov-principles > div,
+.decision-flow > div,
+.architecture-stack > div,
+.runtime-flow > div,
+.event-flow > div,
+.roadmap > div,
+.discovery-grid > div,
+.resource-card,
+.decision-example {
+  background: var(--panel) !important;
+  border-color: var(--line) !important;
+}
+
+.featured-pov-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(238, 0, 0, .055),
+      rgba(238, 0, 0, .012)
+    ),
+    #ffffff !important;
+  border-color: rgba(181, 0, 0, .30) !important;
+}
+
+/* Browseable surfaces */
+.pov-card:hover,
+.project-card:hover,
+.resource-card:hover,
+.section .card:hover,
+.section .decision-example:hover,
+.section .architecture-stack > div:hover,
+.section .runtime-flow > div:hover,
+.section .roadmap > div:hover,
+.section .decision-flow > div:hover,
+.section .tech-row:hover {
+  background: #f8f8f8 !important;
+  border-color: #8a8d90 !important;
+  box-shadow: 0 10px 24px rgba(21, 21, 21, .08) !important;
+}
+
+.resource-card:hover a {
+  color: var(--accent) !important;
+}
+
+/* POV diagrams and decision components */
+.architecture-stack .accent-box,
+.featured-choice {
+  border-color: rgba(181, 0, 0, .45) !important;
+}
+
+.runtime-flow span,
+.event-flow span,
+.roadmap span {
+  background: var(--accent-strong);
+  color: #ffffff;
+}
+
+.decision-flow div span,
+.resource-card > span,
+.discovery-grid span,
+.architecture-stack > span,
+.dc-plus {
+  color: var(--accent);
+}
+
+.decision-example code {
+  color: #151515;
+}
+
+/* Visitor indicator */
+.visitor-dot {
+  background: var(--accent-strong);
+  box-shadow: 0 0 8px rgba(238, 0, 0, .20);
+}
+
+/* ---------------------------------------------------------
+   Research & Analysis article overrides
+   --------------------------------------------------------- */
+.article-copy {
+  color: var(--muted) !important;
+}
+
+.article-copy blockquote,
+.research-callout,
+.research-decision,
+.signal-grid div,
+.evidence-chain div,
+.authority-grid div,
+.architecture-model > div,
+.principle-list > div {
+  background: #ffffff !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+
+.research-thesis {
+  background:
+    linear-gradient(135deg, rgba(238, 0, 0, .055), rgba(238, 0, 0, .012)),
+    #ffffff !important;
+  border-color: rgba(181, 0, 0, .32) !important;
+}
+
+/* ---------------------------------------------------------
+   8-Hour Identity detailed article overrides
+   --------------------------------------------------------- */
+.article-deck,
+.article-body p,
+.article-body li {
+  color: var(--muted) !important;
+}
+
+.article-body blockquote,
+.article-body pre {
+  background: #ffffff !important;
+  border-color: var(--line) !important;
+  color: var(--text) !important;
+}
+
+.article-body code {
+  color: var(--accent) !important;
+}
+
+/* Improve focus visibility on the light background */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(238, 0, 0, .35);
+  outline-offset: 3px;
+}
+
+/* ===== TEAL CTA PATCH START ===== */
+/* =========================================================
+   TEAL CTA PATCH
+   Keeps the light editorial theme and mint/teal identity,
+   while removing Red Hat red from primary actions.
+   ========================================================= */
+
+:root {
+  --accent: #007a5e;
+  --accent-2: #005c46;
+  --accent-soft: #8be0c0;
+
+  /* Primary action color: deep evergreen/teal */
+  --accent-strong: #0b6652;
+  --accent-strong-hover: #084f40;
+}
+
+/* Primary CTA buttons */
+.button.primary {
+  background: var(--accent-strong) !important;
+  border-color: var(--accent-strong) !important;
+  color: #ffffff !important;
+}
+
+.button.primary:hover {
+  background: var(--accent-strong-hover) !important;
+  border-color: var(--accent-strong-hover) !important;
+  color: #ffffff !important;
+}
+
+/* Keyboard focus stays in the same visual family */
+.button.primary:focus-visible {
+  outline: 3px solid rgba(11, 102, 82, .24) !important;
+  outline-offset: 3px;
+}
+
+/* Optional active/pressed treatment */
+.button.primary:active {
+  background: #064337 !important;
+  border-color: #064337 !important;
+}
+/* ===== TEAL CTA PATCH END ===== */
+
+/* Improve long-form blueprint introduction readability on light theme */
+.pov-intro {
+  color: #3f454a !important;
+}
+
+/* ===== FEATURED POV HOVER FIX START ===== */
+/* =========================================================
+   FEATURED ARCHITECTURE POV HOVER FIX
+   Ensures the whole published POV tile visibly changes on hover,
+   even when earlier light-theme rules use !important.
+   ========================================================= */
+
+#povs .featured-pov-card.featured-pov-link {
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease !important;
+}
+
+#povs .featured-pov-card.featured-pov-link:hover,
+#povs .featured-pov-card.featured-pov-link:focus-visible {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 224, 192, .30),
+      rgba(139, 224, 192, .14)
+    ),
+    #eefaf6 !important;
+
+  border-color: #007a5e !important;
+  box-shadow: 0 14px 30px rgba(0, 90, 70, .12) !important;
+  transform: translateY(-4px) !important;
+}
+
+#povs .featured-pov-card.featured-pov-link:hover h3,
+#povs .featured-pov-card.featured-pov-link:focus-visible h3 {
+  color: #005c46 !important;
+}
+
+#povs .featured-pov-card.featured-pov-link:hover .button.secondary,
+#povs .featured-pov-card.featured-pov-link:focus-visible .button.secondary {
+  border-color: #007a5e !important;
+  color: #005c46 !important;
+  background: rgba(139, 224, 192, .14) !important;
+}
+/* ===== FEATURED POV HOVER FIX END ===== */
+
+/* ===== UNIFIED TILE HOVER START ===== */
+/* =========================================================
+   UNIFIED INTERACTIVE TILE HOVER
+   Applies the same mint hover treatment used by featured
+   Architecture POVs to published blueprints and Research & Analysis.
+   ========================================================= */
+
+/* Published modernization blueprint tiles */
+#povs .pov-card.clickable-pov {
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease !important;
+}
+
+#povs .pov-card.clickable-pov:hover,
+#povs .pov-card.clickable-pov:focus-visible {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 224, 192, .30),
+      rgba(139, 224, 192, .14)
+    ),
+    #eefaf6 !important;
+
+  border-color: #007a5e !important;
+  box-shadow: 0 14px 30px rgba(0, 90, 70, .12) !important;
+  transform: translateY(-4px) !important;
+}
+
+#povs .pov-card.clickable-pov:hover h3,
+#povs .pov-card.clickable-pov:focus-visible h3 {
+  color: #005c46 !important;
+}
+
+#povs .pov-card.clickable-pov:hover .tile-link-cue,
+#povs .pov-card.clickable-pov:focus-visible .tile-link-cue {
+  color: #005c46 !important;
+}
+
+/* Research & Analysis featured article */
+#research .research-feature-card {
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease !important;
+}
+
+#research .research-feature-card:hover,
+#research .research-feature-card:focus-visible {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 224, 192, .30),
+      rgba(139, 224, 192, .14)
+    ),
+    #eefaf6 !important;
+
+  border-color: #007a5e !important;
+  box-shadow: 0 14px 30px rgba(0, 90, 70, .12) !important;
+  transform: translateY(-4px) !important;
+}
+
+#research .research-feature-card:hover h3,
+#research .research-feature-card:focus-visible h3 {
+  color: #005c46 !important;
+}
+
+#research .research-feature-card:hover .button.secondary,
+#research .research-feature-card:focus-visible .button.secondary {
+  border-color: #007a5e !important;
+  color: #005c46 !important;
+  background: rgba(139, 224, 192, .14) !important;
+}
+
+/*
+ * In-development blueprint tiles are intentionally not made clickable.
+ * Give them only a subtle surface response so the published/clickable
+ * state remains visually distinct.
+ */
+#povs .pov-card:not(.clickable-pov):hover {
+  background: #f7fbf9 !important;
+  border-color: #b8d8cd !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0, 90, 70, .06) !important;
+}
+/* ===== UNIFIED TILE HOVER END ===== */
