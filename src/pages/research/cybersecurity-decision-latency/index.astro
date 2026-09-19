@@ -70,7 +70,29 @@ const sourceLinks = [
       </div>
     </section>
 
-    <section class="section shell article-shell">
+    <section class="shell executive-summary" aria-labelledby="executive-summary-title">
+      <div class="executive-summary-card">
+        <div class="section-label">EXECUTIVE SUMMARY</div>
+        <h2 id="executive-summary-title">Security is becoming a problem of turning evidence into safe action fast enough.</h2>
+
+        <ul class="executive-summary-points">
+          <li><strong>Cybersecurity is shifting from a detection problem toward a decision-latency problem.</strong> Finding more issues is useful, but security outcomes increasingly depend on how quickly trustworthy evidence can be converted into a defensible decision.</li>
+          <li><strong>AI is accelerating both attack execution and defensive analysis.</strong> As more activity moves toward machine speed, human attention becomes the scarce resource.</li>
+          <li><strong>More vulnerability data does not automatically create more security.</strong> Prioritization requires correlation across exploitability, reachability, runtime exposure, asset criticality, business impact and remediation context.</li>
+          <li><strong>The architectural question is not human versus AI.</strong> It is which decisions can be delegated safely, under what evidence threshold, with what authority, guardrails and rollback controls.</li>
+          <li><strong>A useful operating model is Evidence → Context → Decision → Authority → Action → Feedback.</strong> The goal is not maximum autonomy; it is minimum safe decision latency.</li>
+        </ul>
+
+        <div class="executive-summary-thesis">
+          <span>CORE THESIS</span>
+          <p>The future of cybersecurity may be determined less by who detects the most threats, and more by who can convert trustworthy evidence into safe action with the least decision latency.</p>
+        </div>
+
+        <a class="executive-summary-link" href="#analysis">Continue to the full analysis ↓</a>
+      </div>
+    </section>
+
+    <section class="section shell article-shell" id="analysis">
       <div class="article-copy">
         <p class="article-lede">
           For years, much of cybersecurity has been built around a simple assumption: if we can detect more threats and vulnerabilities, we can become more secure.
@@ -254,15 +276,15 @@ const sourceLinks = [
 
         <div class="architecture-model">
           <div><span>01</span><strong>Evidence</strong><small>CVEs · SBOMs · VEX · provenance · signatures · telemetry · exploit observations</small></div>
-          <b>→</b>
+          <b>↓</b>
           <div><span>02</span><strong>Context</strong><small>Criticality · exposure · reachability · identity · environment · business impact</small></div>
-          <b>→</b>
+          <b>↓</b>
           <div><span>03</span><strong>Decision</strong><small>What actually matters now?</small></div>
-          <b>→</b>
+          <b>↓</b>
           <div><span>04</span><strong>Authority</strong><small>Who—or what—is permitted to act?</small></div>
-          <b>→</b>
+          <b>↓</b>
           <div><span>05</span><strong>Action</strong><small>Patch · isolate · block · rotate · investigate · approve · accept</small></div>
-          <b>→</b>
+          <b>↓</b>
           <div><span>06</span><strong>Feedback</strong><small>Did the action work, and did risk actually decrease?</small></div>
         </div>
 
@@ -333,6 +355,83 @@ const sourceLinks = [
 
   <style>
     .research-hero .hero-copy { max-width: 880px; }
+
+    .executive-summary {
+      padding: 48px 0 8px;
+    }
+
+    .executive-summary-card {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px;
+      border: 1px solid rgba(0, 122, 94, .28);
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(139, 224, 192, .20), rgba(139, 224, 192, .05)),
+        var(--panel);
+      box-shadow: 0 12px 30px rgba(0, 90, 70, .06);
+    }
+
+    .executive-summary-card h2 {
+      max-width: 840px;
+      margin: 16px 0 24px;
+      font-size: clamp(28px, 3.4vw, 42px);
+      line-height: 1.16;
+      color: var(--text);
+    }
+
+    .executive-summary-points {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .executive-summary-points li {
+      padding-left: 6px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.62;
+    }
+
+    .executive-summary-points li::marker {
+      color: var(--accent);
+    }
+
+    .executive-summary-points strong {
+      color: var(--text);
+    }
+
+    .executive-summary-thesis {
+      margin-top: 28px;
+      padding: 20px 22px;
+      border-left: 3px solid var(--accent);
+      background: rgba(139, 224, 192, .10);
+    }
+
+    .executive-summary-thesis span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .03em;
+    }
+
+    .executive-summary-thesis p {
+      margin: 0;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    .executive-summary-link {
+      display: inline-block;
+      margin-top: 24px;
+      color: var(--accent);
+      font-weight: 700;
+    }
 
     .article-shell {
       display: block;
@@ -575,6 +674,11 @@ const sourceLinks = [
     .source-list b { color: var(--accent); font-size: 18px; }
 
     @media (max-width: 720px) {
+      .executive-summary { padding-top: 32px; }
+      .executive-summary-card { padding: 24px; }
+      .executive-summary-points { padding-left: 20px; }
+      .executive-summary-points li { font-size: 16px; }
+      .executive-summary-thesis p { font-size: 17px; }
       .article-copy { font-size: 17px; }
       .article-copy .article-lede { font-size: 21px; }
       .article-copy h2 { margin-top: 56px; }
